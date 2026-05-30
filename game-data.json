@@ -1,0 +1,115 @@
+{
+  "title": "After Hours Answers",
+  "hostPin": "4242",
+  "defaultTeams": ["Best Men", "College", "Family", "Chaos"],
+  "rounds": [
+    {
+      "id": "opening-round",
+      "title": "Opening Round",
+      "transitionTitle": "First Pour",
+      "valuePrefix": "$",
+      "categories": [
+        {
+          "id": "the-groom",
+          "title": "The Groom",
+          "clues": [
+            {
+              "id": "groom-200",
+              "value": 200,
+              "prompt": "Starter clue: replace this with a groom-specific question.",
+              "answer": "Sample answer"
+            },
+            {
+              "id": "groom-400",
+              "value": 400,
+              "prompt": "Hidden wager sample. The host chooses the stake after reveal.",
+              "answer": "Sample answer",
+              "special": "wager"
+            }
+          ]
+        },
+        {
+          "id": "mandela-effect",
+          "title": "Mandela Effect",
+          "clues": [
+            {
+              "id": "mandela-200",
+              "value": 200,
+              "prompt": "Which version is the real quote?",
+              "answer": "No, I am your father",
+              "notes": "Place a short local clip at public/media/mandela/star-wars-line.mp4 if you want video.",
+              "media": {
+                "type": "video",
+                "src": "/media/mandela/star-wars-line.mp4",
+                "caption": "Local clip placeholder"
+              }
+            },
+            {
+              "id": "mandela-400",
+              "value": 400,
+              "prompt": "Image clue placeholder for a local Mandela Effect picture.",
+              "answer": "Sample answer",
+              "media": {
+                "type": "image",
+                "src": "/media/mandela/example.png",
+                "alt": "Local clue image placeholder"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "doubled-round",
+      "title": "Doubled Round",
+      "transitionTitle": "Round Two Hits Harder",
+      "valuePrefix": "$",
+      "categories": [
+        {
+          "id": "bad-ideas",
+          "title": "Bad Ideas",
+          "clues": [
+            {
+              "id": "bad-ideas-400",
+              "value": 400,
+              "prompt": "Replace this with an inside-joke clue.",
+              "answer": "Sample answer"
+            },
+            {
+              "id": "bad-ideas-800",
+              "value": 800,
+              "prompt": "Replace this with a higher-stakes inside-joke clue.",
+              "answer": "Sample answer"
+            }
+          ]
+        },
+        {
+          "id": "trips",
+          "title": "Trips",
+          "clues": [
+            {
+              "id": "trips-400",
+              "value": 400,
+              "prompt": "Which trip story belongs here?",
+              "answer": "Sample answer"
+            },
+            {
+              "id": "trips-800",
+              "value": 800,
+              "prompt": "Another trip clue placeholder.",
+              "answer": "Sample answer",
+              "special": "wager"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "finalChallenge": {
+    "category": "Last Call",
+    "prompt": "Final prompt placeholder. Teams wager before this is revealed.",
+    "answer": "Sample final answer",
+    "notes": "Host-only final answer notes can go here."
+  }
+}
+
