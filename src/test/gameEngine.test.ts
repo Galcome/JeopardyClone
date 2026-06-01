@@ -10,6 +10,7 @@ import {
   openBuzzers,
   registerBuzz,
   resolveFinalTeam,
+  revealDisplayAnswer,
   revealHostAnswer,
   selectClue,
   setFinalWager,
@@ -80,6 +81,16 @@ describe('game engine', () => {
     const state = revealHostAnswer(selected);
 
     expect(state.activeClue?.hostAnswerVisible).toBe(true);
+    expect(state.activeClue?.displayAnswerVisible).toBe(false);
+  });
+
+  it('reveals the answer to the display only after the host chooses to share it', () => {
+    const selected = selectClue(createInitialState(game), game, 'r1', 'cat', 'c1');
+    const hostVisible = revealHostAnswer(selected);
+    const displayVisible = revealDisplayAnswer(hostVisible);
+
+    expect(displayVisible.activeClue?.hostAnswerVisible).toBe(true);
+    expect(displayVisible.activeClue?.displayAnswerVisible).toBe(true);
   });
 
   it('locks the first buzzer and ignores later buzzes until reopened', () => {
@@ -153,4 +164,3 @@ describe('game engine', () => {
     expect(state.finalResults['team-1']).toMatchObject({ wager: 700, correct: true, locked: true });
   });
 });
-

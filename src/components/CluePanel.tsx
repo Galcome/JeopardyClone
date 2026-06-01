@@ -1,4 +1,5 @@
-import { Eye, RotateCcw, ThumbsDown, ThumbsUp, Volume2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Eye, MonitorUp, RotateCcw, ThumbsDown, ThumbsUp, Volume2 } from 'lucide-react';
 import { findClue } from '../shared/gameData';
 import type { GameData, GameState, HostCommand } from '../shared/types';
 import { MediaFrame } from './MediaFrame';
@@ -14,7 +15,17 @@ interface CluePanelProps {
 export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps): JSX.Element {
   const active = state.activeClue;
   const clue = active ? findClue(game, active.roundId, active.categoryId, active.clueId) : null;
-  const selectedTeamId = state.buzzes[0]?.teamId ?? state.teams[0]?.id;
+  const [selectedTeamId, setSelectedTeamId] = useState(() => state.buzzes[0]?.teamId ?? state.teams[0]?.id ?? '');
+
+  useEffect(() => {
+    if (state.buzzes[0]) {
+      setSelectedTeamId(state.buzzes[0].teamId);
+      return;
+    }
+    if (!state.teams.some((team) => team.id === selectedTeamId)) {
+      setSelectedTeamId(state.teams[0]?.id ?? '');
+    }
+  }, [selectedTeamId, state.buzzes, state.teams]);
 
   if (!active || !clue) {
     return <section className="clue-screen">No clue selected.</section>;
@@ -30,6 +41,12 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
         {!hostMode && state.buzzes[0] && (
           <div className="buzz-banner">
             {state.buzzes[0].playerName} for {state.buzzes[0].teamName}
+          </div>
+        )}
+        {!hostMode && active.displayAnswerVisible && (
+          <div className="display-answer">
+            <span>Answer</span>
+            <strong>{clue.answer}</strong>
           </div>
         )}
       </div>
@@ -60,6 +77,13 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
                 {clue.notes && <p>{clue.notes}</p>}
               </div>
             )}
+            <button
+              type="button"
+              disabled={!active.hostAnswerVisible || active.displayAnswerVisible}
+              onClick={() => sendCommand({ type: 'reveal-answer-to-display' })}
+            >
+              <MonitorUp size={18} /> Reveal to Display
+            </button>
           </div>
 
           <div className="control-group">
@@ -72,16 +96,16 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
             <div className="buzz-status">{state.buzzersOpen ? 'Buzzers open' : state.buzzes[0]?.playerName ?? 'Buzzers closed'}</div>
           </div>
 
-          <Scoreboard teams={state.teams} selectedTeamId={selectedTeamId} />
+          <Scoreboard teams={state.teams} selectedTeamId={selectedTeamId} onSelectTeam={setSelectedTeamId} />
 
           <div className="control-grid">
-            <button type="button" onClick={() => sendCommand({ type: 'mark-correct', teamId: selectedTeamId })}>
+            <button type="button" disabled={!selectedTeamId} onClick={() => sendCommand({ type: 'mark-correct', teamId: selectedTeamId })}>
               <ThumbsUp size={18} /> Correct
             </button>
-            <button type="button" onClick={() => sendCommand({ type: 'mark-wrong', teamId: selectedTeamId, reopen: true })}>
+            <button type="button" disabled={!selectedTeamId} onClick={() => sendCommand({ type: 'mark-wrong', teamId: selectedTeamId, reopen: true })}>
               <ThumbsDown size={18} /> Wrong & Reopen
             </button>
-            <button type="button" onClick={() => sendCommand({ type: 'mark-wrong', teamId: selectedTeamId, reopen: false })}>
+            <button type="button" disabled={!selectedTeamId} onClick={() => sendCommand({ type: 'mark-wrong', teamId: selectedTeamId, reopen: false })}>
               <ThumbsDown size={18} /> Wrong
             </button>
             <button type="button" onClick={() => sendCommand({ type: 'return-board' })}>
@@ -93,4 +117,3 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
     </section>
   );
 }
-

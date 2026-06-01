@@ -17,6 +17,7 @@ import {
   openBuzzers,
   registerBuzz,
   resolveFinalTeam,
+  revealDisplayAnswer,
   returnToBoard,
   revealFinalClue,
   revealHostAnswer,
@@ -94,6 +95,9 @@ function applyCommand(command: HostCommand) {
       break;
     case 'show-answer':
       state = revealHostAnswer(state);
+      break;
+    case 'reveal-answer-to-display':
+      state = revealDisplayAnswer(state);
       break;
     case 'open-buzzers':
       state = openBuzzers(state);

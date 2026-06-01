@@ -74,7 +74,7 @@ export function selectClue(
 
   const next = cloneState(state);
   next.screen = 'clue';
-  next.activeClue = { roundId, categoryId, clueId, hostAnswerVisible: false };
+  next.activeClue = { roundId, categoryId, clueId, hostAnswerVisible: false, displayAnswerVisible: false };
   next.revealedClueIds = [...next.revealedClueIds, clueId];
   next.buzzersOpen = false;
   next.buzzes = [];
@@ -86,6 +86,14 @@ export function revealHostAnswer(state: GameState): GameState {
   if (!state.activeClue) return state;
   const next = cloneState(state);
   next.activeClue = { ...next.activeClue!, hostAnswerVisible: true };
+  return next;
+}
+
+export function revealDisplayAnswer(state: GameState): GameState {
+  if (!state.activeClue) return state;
+  const next = cloneState(state);
+  next.activeClue = { ...next.activeClue!, hostAnswerVisible: true, displayAnswerVisible: true };
+  next.message = 'Answer revealed';
   return next;
 }
 

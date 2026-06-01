@@ -76,6 +76,7 @@ export interface ActiveClue {
   clueId: string;
   wager?: number;
   hostAnswerVisible: boolean;
+  displayAnswerVisible: boolean;
 }
 
 export interface FinalTeamResult {
@@ -127,6 +128,7 @@ export type HostCommand =
   | { type: 'show-board' }
   | { type: 'select-clue'; roundId: string; categoryId: string; clueId: string }
   | { type: 'show-answer' }
+  | { type: 'reveal-answer-to-display' }
   | { type: 'open-buzzers' }
   | { type: 'clear-buzzers' }
   | { type: 'mark-correct'; teamId: string }
