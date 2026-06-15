@@ -10,50 +10,300 @@
       "valuePrefix": "$",
       "categories": [
         {
-          "id": "the-groom",
-          "title": "The Groom",
+          "id": "mandela-effect",
+          "title": "Mandela Effect",
           "clues": [
             {
-              "id": "groom-200",
+              "id": "mandela-star-wars-200",
               "value": 200,
-              "prompt": "Starter clue: replace this with a groom-specific question.",
-              "answer": "Sample answer"
+              "prompt": "Which line is actually said in The Empire Strikes Back?",
+              "answer": "No, I am your father",
+              "notes": "Common false memory: 'Luke, I am your father.' Add your local clip at the media path below.",
+              "media": {
+                "type": "video",
+                "src": "/media/mandela/star-wars-line.mp4",
+                "caption": "Short local clip"
+              }
             },
             {
-              "id": "groom-400",
+              "id": "mandela-fruit-loom-400",
               "value": 400,
-              "prompt": "Hidden wager sample. The host chooses the stake after reveal.",
-              "answer": "Sample answer",
+              "prompt": "Did the official Fruit of the Loom logo ever include a cornucopia?",
+              "answer": "No, the official logo did not include a cornucopia",
+              "notes": "Use an image comparing the remembered version with the official logo.",
+              "media": {
+                "type": "image",
+                "src": "/media/mandela/fruit-of-the-loom.png",
+                "alt": "Fruit of the Loom logo comparison"
+              }
+            },
+            {
+              "id": "mandela-berenstain-600",
+              "value": 600,
+              "prompt": "What is the correct spelling of the bear family from the children's books?",
+              "answer": "Berenstain Bears",
+              "notes": "Common false memory: Berenstein Bears.",
+              "media": {
+                "type": "image",
+                "src": "/media/mandela/berenstain-bears.png",
+                "alt": "Berenstain Bears book cover or logo"
+              }
+            },
+            {
+              "id": "mandela-froot-loops-800",
+              "value": 800,
+              "prompt": "What is the correct cereal spelling: Fruit Loops or Froot Loops?",
+              "answer": "Froot Loops",
+              "notes": "Use a cereal box image if you want the reveal to sting.",
+              "media": {
+                "type": "image",
+                "src": "/media/mandela/froot-loops.png",
+                "alt": "Froot Loops cereal box"
+              }
+            },
+            {
+              "id": "mandela-looney-tunes-1000",
+              "value": 1000,
+              "prompt": "What is the correct spelling of the cartoon series: Looney Toons or Looney Tunes?",
+              "answer": "Looney Tunes",
+              "notes": "Common false memory: Looney Toons.",
+              "media": {
+                "type": "image",
+                "src": "/media/mandela/looney-tunes.png",
+                "alt": "Looney Tunes title card or logo"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bread-facts",
+          "title": "Bread Facts",
+          "clues": [
+            {
+              "id": "bread-facts-200",
+              "value": 200,
+              "prompt": "Yeast makes bread rise by producing bubbles of what gas?",
+              "answer": "Carbon dioxide",
+              "notes": "Yeast fermentation produces carbon dioxide, which is trapped in the dough."
+            },
+            {
+              "id": "bread-facts-400",
+              "value": 400,
+              "prompt": "What elastic protein network gives wheat bread structure and helps trap gas?",
+              "answer": "Gluten"
+            },
+            {
+              "id": "bread-facts-600",
+              "value": 600,
+              "prompt": "What browning reaction helps give bread crust its brown color and roasted flavor?",
+              "answer": "Maillard reaction",
+              "notes": "Accept Maillard."
+            },
+            {
+              "id": "bread-facts-800",
+              "value": 800,
+              "prompt": "A sourdough starter is mainly a culture of wild yeast and what acid-producing bacteria?",
+              "answer": "Lactic acid bacteria",
+              "notes": "Accept lactobacilli."
+            },
+            {
+              "id": "bread-facts-1000",
+              "value": 1000,
+              "prompt": "Bread staling is associated with what process where starch molecules recrystallize after baking?",
+              "answer": "Starch retrogradation",
+              "notes": "Accept retrogradation.",
+              "special": "wager",
+              "media": {
+                "type": "image",
+                "src": "/media/bread-facts/stale-bread.png",
+                "alt": "Stale bread or bread delivery clue"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bad-decisions",
+          "title": "Bad Decisions",
+          "clues": [
+            {
+              "id": "bad-decisions-200",
+              "value": 200,
+              "prompt": "Who is most likely to suggest 'one more stop' when everyone should go home?",
+              "answer": "Fill in the person"
+            },
+            {
+              "id": "bad-decisions-400",
+              "value": 400,
+              "prompt": "Which night out should have ended at least two hours earlier?",
+              "answer": "Fill in the event or night"
+            },
+            {
+              "id": "bad-decisions-600",
+              "value": 600,
+              "prompt": "What purchase, bet, or idea seemed brilliant for about five minutes?",
+              "answer": "Fill in the decision"
+            },
+            {
+              "id": "bad-decisions-800",
+              "value": 800,
+              "prompt": "Which member of the group has the worst track record with directions, timing, or planning?",
+              "answer": "Fill in the person"
+            },
+            {
+              "id": "bad-decisions-1000",
+              "value": 1000,
+              "prompt": "What is the most expensive sentence someone in this group has ever said?",
+              "answer": "Fill in the quote or incident"
+            }
+          ]
+        },
+        {
+          "id": "name-that-quote",
+          "title": "Name That Quote",
+          "clues": [
+            {
+              "id": "name-that-quote-200",
+              "value": 200,
+              "prompt": "Who said this? \"Replace this with an easy group quote.\"",
+              "answer": "Fill in the speaker"
+            },
+            {
+              "id": "name-that-quote-400",
+              "value": 400,
+              "prompt": "Who said this? \"Replace this with a quote from a trip or night out.\"",
+              "answer": "Fill in the speaker"
+            },
+            {
+              "id": "name-that-quote-600",
+              "value": 600,
+              "prompt": "Who said this in the group chat?",
+              "answer": "Fill in the speaker",
+              "media": {
+                "type": "image",
+                "src": "/media/quotes/group-chat-quote.png",
+                "alt": "Censored group chat quote"
+              }
+            },
+            {
+              "id": "name-that-quote-800",
+              "value": 800,
+              "prompt": "Who left this voice note or said this line?",
+              "answer": "Fill in the speaker",
+              "media": {
+                "type": "audio",
+                "src": "/media/quotes/voice-note.mp3",
+                "caption": "Local voice note"
+              }
+            },
+            {
+              "id": "name-that-quote-1000",
+              "value": 1000,
+              "prompt": "Who said the most regrettable sentence in this category?",
+              "answer": "Fill in the speaker",
               "special": "wager"
             }
           ]
         },
         {
-          "id": "mandela-effect",
-          "title": "Mandela Effect",
+          "id": "then-vs-now",
+          "title": "Then vs Now",
           "clues": [
             {
-              "id": "mandela-200",
+              "id": "then-vs-now-200",
               "value": 200,
-              "prompt": "Which version is the real quote?",
-              "answer": "No, I am your father",
-              "notes": "Place a short local clip at public/media/mandela/star-wars-line.mp4 if you want video.",
+              "prompt": "Who is in this old photo?",
+              "answer": "Fill in the person or people",
               "media": {
-                "type": "video",
-                "src": "/media/mandela/star-wars-line.mp4",
-                "caption": "Local clip placeholder"
+                "type": "image",
+                "src": "/media/then-vs-now/old-photo-1.png",
+                "alt": "Old photo clue"
               }
             },
             {
-              "id": "mandela-400",
+              "id": "then-vs-now-400",
               "value": 400,
-              "prompt": "Image clue placeholder for a local Mandela Effect picture.",
-              "answer": "Sample answer",
+              "prompt": "What year was this photo taken?",
+              "answer": "Fill in the year",
               "media": {
                 "type": "image",
-                "src": "/media/mandela/example.png",
-                "alt": "Local clue image placeholder"
+                "src": "/media/then-vs-now/old-photo-2.png",
+                "alt": "Old photo clue"
               }
+            },
+            {
+              "id": "then-vs-now-600",
+              "value": 600,
+              "prompt": "Where was this photo taken?",
+              "answer": "Fill in the location",
+              "media": {
+                "type": "image",
+                "src": "/media/then-vs-now/location-photo.png",
+                "alt": "Location photo clue"
+              }
+            },
+            {
+              "id": "then-vs-now-800",
+              "value": 800,
+              "prompt": "What questionable fashion choice is happening here?",
+              "answer": "Fill in the fashion choice",
+              "media": {
+                "type": "image",
+                "src": "/media/then-vs-now/fashion-choice.png",
+                "alt": "Fashion choice clue"
+              }
+            },
+            {
+              "id": "then-vs-now-1000",
+              "value": 1000,
+              "prompt": "What was happening immediately before or after this picture?",
+              "answer": "Fill in the story",
+              "media": {
+                "type": "image",
+                "src": "/media/then-vs-now/story-photo.png",
+                "alt": "Story photo clue"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bachelor-parties",
+          "title": "Bachelor Parties",
+          "clues": [
+            {
+              "id": "bachelor-parties-200",
+              "value": 200,
+              "prompt": "In British English, a bachelor party is commonly called a stag party or what two-word term?",
+              "answer": "Stag night",
+              "notes": "Accept stag do."
+            },
+            {
+              "id": "bachelor-parties-400",
+              "value": 400,
+              "prompt": "In Australian English, a bachelor party is commonly called a buck's party or what kind of night?",
+              "answer": "Buck's night",
+              "notes": "Accept bucks night."
+            },
+            {
+              "id": "bachelor-parties-600",
+              "value": 600,
+              "prompt": "According to common wedding planning etiquette, which wedding-party role usually leads bachelor party planning?",
+              "answer": "The best man",
+              "notes": "Accept best man."
+            },
+            {
+              "id": "bachelor-parties-800",
+              "value": 800,
+              "prompt": "The term \"bachelor party\" is North American English; Oxford lists what British English term as its direct equivalent?",
+              "answer": "Stag night",
+              "notes": "Accept stag party."
+            },
+            {
+              "id": "bachelor-parties-1000",
+              "value": 1000,
+              "prompt": "Dictionary.com dates the origin of the phrase \"bachelor party\" to what decade range?",
+              "answer": "1920 to 1925",
+              "notes": "Accept the 1920s.",
+              "special": "wager"
             }
           ]
         }
@@ -66,39 +316,286 @@
       "valuePrefix": "$",
       "categories": [
         {
-          "id": "bad-ideas",
-          "title": "Bad Ideas",
+          "id": "movie-lines",
+          "title": "Movie Lines",
           "clues": [
             {
-              "id": "bad-ideas-400",
+              "id": "movie-lines-400",
               "value": 400,
-              "prompt": "Replace this with an inside-joke clue.",
-              "answer": "Sample answer"
+              "prompt": "Name the movie from this quote or clip.",
+              "answer": "Fill in the movie",
+              "media": {
+                "type": "video",
+                "src": "/media/movie-lines/movie-line-1.mp4",
+                "caption": "Local movie clip"
+              }
             },
             {
-              "id": "bad-ideas-800",
+              "id": "movie-lines-800",
               "value": 800,
-              "prompt": "Replace this with a higher-stakes inside-joke clue.",
-              "answer": "Sample answer"
+              "prompt": "Name the actor who says this line.",
+              "answer": "Fill in the actor",
+              "media": {
+                "type": "audio",
+                "src": "/media/movie-lines/movie-line-2.mp3",
+                "caption": "Local audio clip"
+              }
+            },
+            {
+              "id": "movie-lines-1200",
+              "value": 1200,
+              "prompt": "Which movie is this screenshot from?",
+              "answer": "Fill in the movie",
+              "media": {
+                "type": "image",
+                "src": "/media/movie-lines/screenshot-1.png",
+                "alt": "Movie screenshot"
+              }
+            },
+            {
+              "id": "movie-lines-1600",
+              "value": 1600,
+              "prompt": "Finish the line after the clip cuts off.",
+              "answer": "Fill in the rest of the line",
+              "media": {
+                "type": "video",
+                "src": "/media/movie-lines/finish-the-line.mp4",
+                "caption": "Local movie clip"
+              }
+            },
+            {
+              "id": "movie-lines-2000",
+              "value": 2000,
+              "prompt": "Name the movie from the most obscure line in this category.",
+              "answer": "Fill in the movie",
+              "special": "wager"
             }
           ]
         },
         {
-          "id": "trips",
-          "title": "Trips",
+          "id": "deep-cuts",
+          "title": "Deep Cuts",
           "clues": [
             {
-              "id": "trips-400",
+              "id": "deep-cuts-400",
               "value": 400,
-              "prompt": "Which trip story belongs here?",
-              "answer": "Sample answer"
+              "prompt": "What is the groom's most oddly specific preference?",
+              "answer": "Fill in the preference"
             },
             {
-              "id": "trips-800",
+              "id": "deep-cuts-800",
               "value": 800,
-              "prompt": "Another trip clue placeholder.",
-              "answer": "Sample answer",
+              "prompt": "What is a fact about the groom that sounds fake but is true?",
+              "answer": "Fill in the fact"
+            },
+            {
+              "id": "deep-cuts-1200",
+              "value": 1200,
+              "prompt": "What nickname, username, or old handle should never have seen daylight?",
+              "answer": "Fill in the nickname or handle"
+            },
+            {
+              "id": "deep-cuts-1600",
+              "value": 1600,
+              "prompt": "What topic can the groom talk about for too long?",
+              "answer": "Fill in the topic"
+            },
+            {
+              "id": "deep-cuts-2000",
+              "value": 2000,
+              "prompt": "What obscure groom detail separates friends from acquaintances?",
+              "answer": "Fill in the detail"
+            }
+          ]
+        },
+        {
+          "id": "where-were-we",
+          "title": "Where Were We?",
+          "clues": [
+            {
+              "id": "where-were-we-400",
+              "value": 400,
+              "prompt": "What city or venue is shown here?",
+              "answer": "Fill in the location",
+              "media": {
+                "type": "image",
+                "src": "/media/where-were-we/location-1.png",
+                "alt": "Location clue"
+              }
+            },
+            {
+              "id": "where-were-we-800",
+              "value": 800,
+              "prompt": "Which trip was this from?",
+              "answer": "Fill in the trip",
+              "media": {
+                "type": "image",
+                "src": "/media/where-were-we/trip-1.png",
+                "alt": "Trip photo clue"
+              }
+            },
+            {
+              "id": "where-were-we-1200",
+              "value": 1200,
+              "prompt": "What happened at this place later that night?",
+              "answer": "Fill in the story",
+              "media": {
+                "type": "image",
+                "src": "/media/where-were-we/story-location.png",
+                "alt": "Story location clue"
+              }
+            },
+            {
+              "id": "where-were-we-1600",
+              "value": 1600,
+              "prompt": "Who got lost, delayed, or separated here?",
+              "answer": "Fill in the person"
+            },
+            {
+              "id": "where-were-we-2000",
+              "value": 2000,
+              "prompt": "What is the full story behind this photo?",
+              "answer": "Fill in the story",
+              "media": {
+                "type": "image",
+                "src": "/media/where-were-we/full-story.png",
+                "alt": "Full story photo clue"
+              }
+            }
+          ]
+        },
+        {
+          "id": "group-chat-evidence",
+          "title": "Group Chat Evidence",
+          "clues": [
+            {
+              "id": "group-chat-400",
+              "value": 400,
+              "prompt": "Who sent this message?",
+              "answer": "Fill in the sender",
+              "media": {
+                "type": "image",
+                "src": "/media/group-chat/message-1.png",
+                "alt": "Censored group chat screenshot"
+              }
+            },
+            {
+              "id": "group-chat-800",
+              "value": 800,
+              "prompt": "What word or phrase was censored from this message?",
+              "answer": "Fill in the censored text",
+              "media": {
+                "type": "image",
+                "src": "/media/group-chat/censored-message.png",
+                "alt": "Censored group chat screenshot"
+              }
+            },
+            {
+              "id": "group-chat-1200",
+              "value": 1200,
+              "prompt": "What event caused this group chat reaction?",
+              "answer": "Fill in the event",
+              "media": {
+                "type": "image",
+                "src": "/media/group-chat/reaction.png",
+                "alt": "Group chat reaction screenshot"
+              }
+            },
+            {
+              "id": "group-chat-1600",
+              "value": 1600,
+              "prompt": "Who was being roasted in this exchange?",
+              "answer": "Fill in the person",
+              "media": {
+                "type": "image",
+                "src": "/media/group-chat/roast.png",
+                "alt": "Group chat roast screenshot"
+              }
+            },
+            {
+              "id": "group-chat-2000",
+              "value": 2000,
+              "prompt": "What was the final message before the plans fell apart?",
+              "answer": "Fill in the message or sender",
+              "special": "wager",
+              "media": {
+                "type": "image",
+                "src": "/media/group-chat/final-message.png",
+                "alt": "Group chat final message screenshot"
+              }
+            }
+          ]
+        },
+        {
+          "id": "the-bride-knows",
+          "title": "The Bride Knows",
+          "clues": [
+            {
+              "id": "bride-knows-400",
+              "value": 400,
+              "prompt": "According to the bride, what is the groom's most endearing habit?",
+              "answer": "Ask the bride and fill this in"
+            },
+            {
+              "id": "bride-knows-800",
+              "value": 800,
+              "prompt": "According to the bride, what is the groom's most annoying habit?",
+              "answer": "Ask the bride and fill this in"
+            },
+            {
+              "id": "bride-knows-1200",
+              "value": 1200,
+              "prompt": "What did the bride first notice about the groom?",
+              "answer": "Ask the bride and fill this in"
+            },
+            {
+              "id": "bride-knows-1600",
+              "value": 1600,
+              "prompt": "What would the bride say is the groom's worst household skill?",
+              "answer": "Ask the bride and fill this in"
+            },
+            {
+              "id": "bride-knows-2000",
+              "value": 2000,
+              "prompt": "What does the bride predict the groom will do first at the bachelor party?",
+              "answer": "Ask the bride and fill this in"
+            }
+          ]
+        },
+        {
+          "id": "wager-trouble",
+          "title": "Wager Trouble",
+          "clues": [
+            {
+              "id": "wager-trouble-400",
+              "value": 400,
+              "prompt": "Who in the room is most likely to turn a simple plan into a full production?",
+              "answer": "Fill in the person"
+            },
+            {
+              "id": "wager-trouble-800",
+              "value": 800,
+              "prompt": "What is the most controversial food, drink, or music opinion in the group?",
+              "answer": "Fill in the opinion"
+            },
+            {
+              "id": "wager-trouble-1200",
+              "value": 1200,
+              "prompt": "What story starts funny but gets worse the longer someone explains it?",
+              "answer": "Fill in the story",
               "special": "wager"
+            },
+            {
+              "id": "wager-trouble-1600",
+              "value": 1600,
+              "prompt": "What is the most suspiciously repeated excuse in the group?",
+              "answer": "Fill in the excuse"
+            },
+            {
+              "id": "wager-trouble-2000",
+              "value": 2000,
+              "prompt": "What question would cause the loudest argument if asked at the table?",
+              "answer": "Fill in the accepted answer"
             }
           ]
         }
@@ -107,9 +604,8 @@
   ],
   "finalChallenge": {
     "category": "Last Call",
-    "prompt": "Final prompt placeholder. Teams wager before this is revealed.",
-    "answer": "Sample final answer",
-    "notes": "Host-only final answer notes can go here."
+    "prompt": "Before the wedding day, what is one thing the groom absolutely must not forget?",
+    "answer": "Fill in the final accepted answer",
+    "notes": "Good final options: bride-supplied answer, wedding detail, or brutal inside joke."
   }
 }
-
