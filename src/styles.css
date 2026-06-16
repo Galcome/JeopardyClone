@@ -196,19 +196,29 @@ label {
   border: 0;
   border-radius: 0;
   background: transparent;
-  display: grid;
-  justify-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 12px;
 }
 
 .team-pick span {
   color: #cbd5e1;
-  font-size: 0.88rem;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .team-pick strong {
   color: var(--gold);
-  font-size: 1.65rem;
+  font-size: 2.2rem;
+  margin-top: 4px;
+}
+
+.team-players {
+  margin-top: 8px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 .score-actions {

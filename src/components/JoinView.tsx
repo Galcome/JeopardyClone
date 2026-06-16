@@ -16,6 +16,8 @@ export function JoinView({ payload, socket, message }: JoinViewProps): JSX.Eleme
   const [joined, setJoined] = useState(false);
   const [localMessage, setLocalMessage] = useState<string | null>(null);
 
+  const isLockedOut = state.lockedOutTeamIds?.includes(teamId);
+
   function join() {
     socket.emit('player:join', { playerName, teamId }, (result) => {
       setJoined(result.ok);
@@ -53,12 +55,12 @@ export function JoinView({ payload, socket, message }: JoinViewProps): JSX.Eleme
 
         {joined && (
           <>
-            <button className={state.buzzersOpen ? 'buzzer-button armed' : 'buzzer-button'} type="button" disabled={!state.buzzersOpen} onClick={buzz}>
+            <button className={state.buzzersOpen && !isLockedOut ? 'buzzer-button armed' : 'buzzer-button'} type="button" disabled={!state.buzzersOpen || isLockedOut} onClick={buzz}>
               <Radio size={44} />
-              {state.buzzersOpen ? 'Buzz' : 'Locked'}
+              {isLockedOut ? 'Locked Out' : state.buzzersOpen ? 'Buzz' : 'Locked'}
             </button>
             <p className="join-status">
-              {state.buzzes[0] ? `${state.buzzes[0].playerName} buzzed first` : state.buzzersOpen ? 'Buzzers open' : 'Waiting for host'}
+              {isLockedOut ? 'You answered incorrectly on this clue.' : state.buzzes[0] ? `${state.buzzes[0].playerName} buzzed first` : state.buzzersOpen ? 'Buzzers open' : 'Waiting for host'}
             </p>
           </>
         )}

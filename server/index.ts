@@ -3,7 +3,7 @@ import { createServer } from 'node:http';
 import { networkInterfaces } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { Server } from 'socket.io';
 import { createServer as createViteServer } from 'vite';
 import {
@@ -19,9 +19,12 @@ import {
   resolveFinalTeam,
   revealDisplayAnswer,
   returnToBoard,
+  unrevealClue,
+  revealNextCategory,
   revealFinalClue,
   revealHostAnswer,
   selectClue,
+  previousRound,
   setFinalWager,
   setSpecialWager,
   setTeams,
@@ -58,8 +61,21 @@ function loadGame() {
   return validateGameData(JSON.parse(raw));
 }
 
-const game = loadGame();
-let state: GameState = showCurrentBoard(createInitialState(game));
+function loadSavedState(): GameState | null {
+  const stateFile = path.join(rootDir, 'game-state.json');
+  if (existsSync(stateFile)) {
+    try {
+      const raw = readFileSync(stateFile, 'utf8');
+      return JSON.parse(raw);
+    } catch (e) {
+      console.error('Failed to load saved state', e);
+    }
+  }
+  return null;
+}
+
+let game = loadGame();
+let state: GameState = loadSavedState() ?? showCurrentBoard(createInitialState(game));
 const app = express();
 const httpServer = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>(httpServer);
@@ -101,18 +117,39 @@ function applyCommand(command: HostCommand) {
       break;
     case 'open-buzzers':
       state = openBuzzers(state);
+      state.timerStartedAt = Date.now();
+      state.timerSeconds = 5;
       break;
     case 'clear-buzzers':
       state = clearBuzzers(state);
+      state.timerStartedAt = null;
       break;
     case 'mark-correct':
       state = markCorrect(state, game, command.teamId);
+      state.timerStartedAt = null;
       break;
     case 'mark-wrong':
       state = markWrong(state, game, command.teamId, command.reopen);
+      state.timerStartedAt = null;
       break;
     case 'return-board':
       state = returnToBoard(state);
+      state.timerStartedAt = null;
+      break;
+    case 'unreveal-clue':
+      state = unrevealClue(state);
+      break;
+    case 'reveal-next-category':
+      state = revealNextCategory(state, game);
+      break;
+    case 'save-state':
+      writeFileSync(path.join(rootDir, 'game-state.json'), JSON.stringify(state, null, 2), 'utf-8');
+      state = { ...state, message: 'Game progress saved' };
+      break;
+    case 'reset-game':
+      const resetTeams = state.teams.map((t) => ({ ...t, score: 0 }));
+      state = showCurrentBoard(createInitialState(game, resetTeams));
+      state.message = 'Game completely restarted';
       break;
     case 'adjust-score':
       state = adjustScore(state, command.teamId, command.delta);
@@ -122,6 +159,9 @@ function applyCommand(command: HostCommand) {
       break;
     case 'advance-round':
       state = advanceRound(state, game);
+      break;
+    case 'previous-round':
+      state = previousRound(state, game);
       break;
     case 'start-final':
       state = startFinal(state);
@@ -134,6 +174,15 @@ function applyCommand(command: HostCommand) {
       break;
     case 'resolve-final-team':
       state = resolveFinalTeam(state, command.teamId, command.correct);
+      break;
+    case 'test-sound':
+      break;
+    case 'start-timer':
+      state.timerStartedAt = Date.now();
+      state.timerSeconds = command.seconds ?? 5;
+      break;
+    case 'stop-timer':
+      state.timerStartedAt = null;
       break;
   }
 }
@@ -164,9 +213,39 @@ io.on('connection', (socket) => {
 
     try {
       applyCommand(command);
+
+      if (command.type === 'mark-correct') io.emit('play-sound', 'correct');
+      if (command.type === 'mark-wrong') io.emit('play-sound', 'wrong');
+      if (command.type === 'select-clue' && state.message === 'Wager Tile') io.emit('play-sound', 'daily_double');
+      if (command.type === 'start-final') io.emit('play-sound', 'final_jeopardy');
+      if (command.type === 'test-sound') io.emit('play-sound', command.soundName);
+
       emitState();
+      try {
+        writeFileSync(path.join(rootDir, 'game-state.json'), JSON.stringify(state, null, 2), 'utf-8');
+      } catch (e) {
+        console.error('Auto-save failed', e);
+      }
     } catch (error) {
       socket.emit('server:message', error instanceof Error ? error.message : 'Command failed');
+    }
+  });
+
+  socket.on('host:update-game', (newGame, callback) => {
+    if (!socket.data.isHost) {
+      callback({ ok: false, message: 'Host PIN required' });
+      return;
+    }
+
+    try {
+      const validatedGame = validateGameData(newGame);
+      writeFileSync(path.join(rootDir, 'game-data.json'), JSON.stringify(validatedGame, null, 2), 'utf-8');
+      game = validatedGame;
+      emitState();
+      callback({ ok: true });
+    } catch (error) {
+      console.error(error);
+      callback({ ok: false, message: error instanceof Error ? error.message : 'Failed to update game data' });
     }
   });
 
@@ -193,8 +272,27 @@ io.on('connection', (socket) => {
       socket.emit('server:message', 'Join a team before buzzing');
       return;
     }
+    const prevBuzzCount = state.buzzes.length;
     state = registerBuzz(state, socket.data.player);
+    if (state.buzzes.length > prevBuzzCount) {
+      io.emit('play-sound', 'buzz');
+      state.timerStartedAt = null;
+    }
     emitState();
+  });
+
+  socket.on('disconnect', () => {
+    if (socket.data.player) {
+      const playerId = socket.data.player.id;
+      state = {
+        ...state,
+        players: state.players.filter(p => p.id !== playerId)
+      };
+      emitState();
+      try {
+        writeFileSync(path.join(rootDir, 'game-state.json'), JSON.stringify(state, null, 2), 'utf-8');
+      } catch (e) {}
+    }
   });
 });
 

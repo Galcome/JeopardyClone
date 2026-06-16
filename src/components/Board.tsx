@@ -4,10 +4,11 @@ interface BoardProps {
   game: GameData;
   round: Round;
   revealedClueIds: string[];
+  revealedCategoryIndex: number;
   onSelect?: (roundId: string, categoryId: string, clueId: string) => void;
 }
 
-export function Board({ game, round, revealedClueIds, onSelect }: BoardProps): JSX.Element {
+export function Board({ game, round, revealedClueIds, revealedCategoryIndex, onSelect }: BoardProps): JSX.Element {
   const maxRows = Math.max(...round.categories.map((category) => category.clues.length));
 
   return (
@@ -17,28 +18,29 @@ export function Board({ game, round, revealedClueIds, onSelect }: BoardProps): J
         <strong>{round.title}</strong>
       </header>
       <div className="board-grid" style={{ gridTemplateColumns: `repeat(${round.categories.length}, minmax(0, 1fr))` }}>
-        {round.categories.map((category) => (
+        {round.categories.map((category, index) => (
           <div className="category-cell" key={category.id}>
-            {category.title}
+            {index <= revealedCategoryIndex ? category.title : ''}
           </div>
         ))}
 
         {Array.from({ length: maxRows }).flatMap((_, rowIndex) =>
-          round.categories.map((category) => {
+          round.categories.map((category, index) => {
             const clue = category.clues[rowIndex];
             if (!clue) return <div className="tile tile-empty" key={`${category.id}-${rowIndex}`} />;
 
             const revealed = revealedClueIds.includes(clue.id);
+            const isCategoryRevealed = index <= revealedCategoryIndex;
             return (
               <button
-                className={clue.special === 'wager' ? 'tile tile-wager' : 'tile'}
+                className={clue.special === 'wager' && isCategoryRevealed ? 'tile tile-wager' : 'tile'}
                 key={clue.id}
                 type="button"
-                disabled={revealed || !onSelect}
+                disabled={!isCategoryRevealed || revealed || !onSelect}
                 onClick={() => onSelect?.(round.id, category.id, clue.id)}
                 aria-label={`${category.title} for ${clue.value}`}
               >
-                {revealed ? '' : `${round.valuePrefix ?? ''}${clue.value}`}
+                {!isCategoryRevealed || revealed ? '' : `${round.valuePrefix ?? ''}${clue.value}`}
               </button>
             );
           })

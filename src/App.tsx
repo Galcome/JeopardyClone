@@ -19,15 +19,23 @@ export function App(): JSX.Element {
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    const playSound = (soundName: string) => {
+      if (routeName() !== 'display') return;
+      const audio = new Audio(`/sounds/${soundName}.mp3`);
+      audio.play().catch(() => {});
+    };
+
     socket.on('public:state', setPublicPayload);
     socket.on('host:state', setHostPayload);
     socket.on('server:message', setMessage);
+    socket.on('play-sound', playSound);
     socket.emit('state:request');
 
     return () => {
       socket.off('public:state', setPublicPayload);
       socket.off('host:state', setHostPayload);
       socket.off('server:message', setMessage);
+      socket.off('play-sound', playSound);
       socket.disconnect();
     };
   }, [socket]);

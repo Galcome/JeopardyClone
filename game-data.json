@@ -1,7 +1,12 @@
 {
   "title": "After Hours Answers",
   "hostPin": "4242",
-  "defaultTeams": ["Best Men", "College", "Family", "Chaos"],
+  "defaultTeams": [
+    "Best Men",
+    "College",
+    "Family",
+    "Chaos"
+  ],
   "rounds": [
     {
       "id": "opening-round",
@@ -10,114 +15,38 @@
       "valuePrefix": "$",
       "categories": [
         {
-          "id": "mandela-effect",
-          "title": "Mandela Effect",
+          "id": "bread",
+          "title": "Bread",
           "clues": [
             {
-              "id": "mandela-star-wars-200",
+              "id": "bread-200",
               "value": 200,
-              "prompt": "Which line is actually said in The Empire Strikes Back?",
-              "answer": "No, I am your father",
-              "notes": "Common false memory: 'Luke, I am your father.' Add your local clip at the media path below.",
-              "media": {
-                "type": "video",
-                "src": "/media/mandela/star-wars-line.mp4",
-                "caption": "Short local clip"
-              }
+              "prompt": "At its simplest, bread is usually made from these four core ingredients.",
+              "answer": "Flour, water, yeast, and salt"
             },
             {
-              "id": "mandela-fruit-loom-400",
+              "id": "bread-400",
               "value": 400,
-              "prompt": "Did the official Fruit of the Loom logo ever include a cornucopia?",
-              "answer": "No, the official logo did not include a cornucopia",
-              "notes": "Use an image comparing the remembered version with the official logo.",
-              "media": {
-                "type": "image",
-                "src": "/media/mandela/fruit-of-the-loom.png",
-                "alt": "Fruit of the Loom logo comparison"
-              }
+              "prompt": "This dense, dark German rye bread is traditionally baked low and slow, giving it its deep colour and rich flavour.",
+              "answer": "Pumpernickel"
             },
             {
-              "id": "mandela-berenstain-600",
+              "id": "bread-600",
               "value": 600,
-              "prompt": "What is the correct spelling of the bear family from the children's books?",
-              "answer": "Berenstain Bears",
-              "notes": "Common false memory: Berenstein Bears.",
-              "media": {
-                "type": "image",
-                "src": "/media/mandela/berenstain-bears.png",
-                "alt": "Berenstain Bears book cover or logo"
-              }
+              "prompt": "Sourdough gets its rise and tangy flavour mainly from wild yeast and this type of bacteria.",
+              "answer": "Lactic acid bacteria"
             },
             {
-              "id": "mandela-froot-loops-800",
+              "id": "bread-800",
               "value": 800,
-              "prompt": "What is the correct cereal spelling: Fruit Loops or Froot Loops?",
-              "answer": "Froot Loops",
-              "notes": "Use a cereal box image if you want the reveal to sting.",
-              "media": {
-                "type": "image",
-                "src": "/media/mandela/froot-loops.png",
-                "alt": "Froot Loops cereal box"
-              }
+              "prompt": "In Imperial Rome, roughly how many adult male citizens received grain or bread through the state grain dole? A. 20,000 B. 50,000 C. 200,000 D. 1,000,000",
+              "answer": "C. 200,000"
             },
             {
-              "id": "mandela-looney-tunes-1000",
+              "id": "bread-1000",
               "value": 1000,
-              "prompt": "What is the correct spelling of the cartoon series: Looney Toons or Looney Tunes?",
-              "answer": "Looney Tunes",
-              "notes": "Common false memory: Looney Toons.",
-              "media": {
-                "type": "image",
-                "src": "/media/mandela/looney-tunes.png",
-                "alt": "Looney Tunes title card or logo"
-              }
-            }
-          ]
-        },
-        {
-          "id": "bread-facts",
-          "title": "Bread Facts",
-          "clues": [
-            {
-              "id": "bread-facts-200",
-              "value": 200,
-              "prompt": "Yeast makes bread rise by producing bubbles of what gas?",
-              "answer": "Carbon dioxide",
-              "notes": "Yeast fermentation produces carbon dioxide, which is trapped in the dough."
-            },
-            {
-              "id": "bread-facts-400",
-              "value": 400,
-              "prompt": "What elastic protein network gives wheat bread structure and helps trap gas?",
-              "answer": "Gluten"
-            },
-            {
-              "id": "bread-facts-600",
-              "value": 600,
-              "prompt": "What browning reaction helps give bread crust its brown color and roasted flavor?",
-              "answer": "Maillard reaction",
-              "notes": "Accept Maillard."
-            },
-            {
-              "id": "bread-facts-800",
-              "value": 800,
-              "prompt": "A sourdough starter is mainly a culture of wild yeast and what acid-producing bacteria?",
-              "answer": "Lactic acid bacteria",
-              "notes": "Accept lactobacilli."
-            },
-            {
-              "id": "bread-facts-1000",
-              "value": 1000,
-              "prompt": "Bread staling is associated with what process where starch molecules recrystallize after baking?",
-              "answer": "Starch retrogradation",
-              "notes": "Accept retrogradation.",
-              "special": "wager",
-              "media": {
-                "type": "image",
-                "src": "/media/bread-facts/stale-bread.png",
-                "alt": "Stale bread or bread delivery clue"
-              }
+              "prompt": "In medieval dining, this thick slab of stale bread was used like an edible plate, often placed under meat or sauce.",
+              "answer": "Trencher"
             }
           ]
         },
@@ -128,182 +57,176 @@
             {
               "id": "bad-decisions-200",
               "value": 200,
-              "prompt": "Who is most likely to suggest 'one more stop' when everyone should go home?",
-              "answer": "Fill in the person"
+              "prompt": "In 1999, NASA lost the Mars Climate Orbiter because one team used one measurement system and another team used a different one. Name the two systems involved in this very expensive mix-up.",
+              "answer": "Metric and imperial / English units"
             },
             {
               "id": "bad-decisions-400",
               "value": 400,
-              "prompt": "Which night out should have ended at least two hours earlier?",
-              "answer": "Fill in the event or night"
+              "prompt": "In 1962, Decca Records passed on signing this band, allegedly saying guitar groups were “on the way out.”",
+              "answer": "The Beatles"
             },
             {
               "id": "bad-decisions-600",
               "value": 600,
-              "prompt": "What purchase, bet, or idea seemed brilliant for about five minutes?",
-              "answer": "Fill in the decision"
+              "prompt": "This video rental giant declined to buy Netflix for about $50 million in 2000, proving that sometimes the late fee is eternal.",
+              "answer": "Blockbuster"
             },
             {
               "id": "bad-decisions-800",
               "value": 800,
-              "prompt": "Which member of the group has the worst track record with directions, timing, or planning?",
-              "answer": "Fill in the person"
+              "prompt": "In 1985, Coca-Cola replaced its original formula with this infamous product, then reversed course after public backlash.",
+              "answer": "New Coke"
             },
             {
               "id": "bad-decisions-1000",
               "value": 1000,
-              "prompt": "What is the most expensive sentence someone in this group has ever said?",
-              "answer": "Fill in the quote or incident"
+              "prompt": "This German airship was filled with hydrogen, a bold choice that ended about as badly as possible in New Jersey in 1937.",
+              "answer": "The Hindenburg"
             }
           ]
         },
         {
-          "id": "name-that-quote",
-          "title": "Name That Quote",
+          "id": "barstool-science",
+          "title": "Barstool Science",
           "clues": [
             {
-              "id": "name-that-quote-200",
+              "id": "barstool-science-200",
               "value": 200,
-              "prompt": "Who said this? \"Replace this with an easy group quote.\"",
-              "answer": "Fill in the speaker"
+              "prompt": "True or false: Searing a steak “locks in the juices.”",
+              "answer": "False"
             },
             {
-              "id": "name-that-quote-400",
+              "id": "barstool-science-400",
               "value": 400,
-              "prompt": "Who said this? \"Replace this with a quote from a trip or night out.\"",
-              "answer": "Fill in the speaker"
+              "prompt": "True or false: You need to wait 30 minutes after eating before swimming to avoid dangerous cramps.",
+              "answer": "False"
             },
             {
-              "id": "name-that-quote-600",
+              "id": "barstool-science-600",
               "value": 600,
-              "prompt": "Who said this in the group chat?",
-              "answer": "Fill in the speaker",
-              "media": {
-                "type": "image",
-                "src": "/media/quotes/group-chat-quote.png",
-                "alt": "Censored group chat quote"
-              }
+              "prompt": "This common grooming act is blamed for making hair grow back thicker, even though it does not actually change hair thickness.",
+              "answer": "Shaving"
             },
             {
-              "id": "name-that-quote-800",
+              "id": "barstool-science-800",
               "value": 800,
-              "prompt": "Who left this voice note or said this line?",
-              "answer": "Fill in the speaker",
-              "media": {
-                "type": "audio",
-                "src": "/media/quotes/voice-note.mp3",
-                "caption": "Local voice note"
-              }
+              "prompt": "True or false: “Beer before liquor, never been sicker” is a reliable rule for avoiding hangovers.",
+              "answer": "False"
             },
             {
-              "id": "name-that-quote-1000",
+              "id": "barstool-science-1000",
               "value": 1000,
-              "prompt": "Who said the most regrettable sentence in this category?",
-              "answer": "Fill in the speaker",
-              "special": "wager"
+              "prompt": "This form of training is often blamed for “killing your gains,” despite being useful when programmed properly.",
+              "answer": "Cardio"
             }
           ]
         },
         {
-          "id": "then-vs-now",
-          "title": "Then vs Now",
+          "id": "dynamic-duo",
+          "title": "Dynamic Duo",
           "clues": [
             {
-              "id": "then-vs-now-200",
+              "id": "dynamic-duo-200",
               "value": 200,
-              "prompt": "Who is in this old photo?",
-              "answer": "Fill in the person or people",
-              "media": {
-                "type": "image",
-                "src": "/media/then-vs-now/old-photo-1.png",
-                "alt": "Old photo clue"
-              }
+              "prompt": "This outlaw duo’s crime spree ended in a police ambush in Louisiana in 1934.",
+              "answer": "Bonnie and Clyde"
             },
             {
-              "id": "then-vs-now-400",
+              "id": "dynamic-duo-400",
               "value": 400,
-              "prompt": "What year was this photo taken?",
-              "answer": "Fill in the year",
-              "media": {
-                "type": "image",
-                "src": "/media/then-vs-now/old-photo-2.png",
-                "alt": "Old photo clue"
-              }
+              "prompt": "This comedy duo’s sketch show gave us Obama’s anger translator Luther and the East/West Bowl names.",
+              "answer": "Key and Peele"
             },
             {
-              "id": "then-vs-now-600",
+              "id": "dynamic-duo-600",
               "value": 600,
-              "prompt": "Where was this photo taken?",
-              "answer": "Fill in the location",
-              "media": {
-                "type": "image",
-                "src": "/media/then-vs-now/location-photo.png",
-                "alt": "Location photo clue"
-              }
+              "prompt": "This duo created South Park, The Book of Mormon, and a lifetime supply of angry parent complaints.",
+              "answer": "Trey Parker and Matt Stone"
             },
             {
-              "id": "then-vs-now-800",
+              "id": "dynamic-duo-800",
               "value": 800,
-              "prompt": "What questionable fashion choice is happening here?",
-              "answer": "Fill in the fashion choice",
-              "media": {
-                "type": "image",
-                "src": "/media/then-vs-now/fashion-choice.png",
-                "alt": "Fashion choice clue"
-              }
+              "prompt": "This Las Vegas magic duo is known for comedy, skepticism, and one partner almost never speaking on stage.",
+              "answer": "Penn and Teller"
             },
             {
-              "id": "then-vs-now-1000",
+              "id": "dynamic-duo-1000",
               "value": 1000,
-              "prompt": "What was happening immediately before or after this picture?",
-              "answer": "Fill in the story",
-              "media": {
-                "type": "image",
-                "src": "/media/then-vs-now/story-photo.png",
-                "alt": "Story photo clue"
-              }
+              "prompt": "This duo’s names are attached to a famous Wall Street index that still exists today.",
+              "answer": "Dow Jones"
             }
           ]
         },
         {
-          "id": "bachelor-parties",
-          "title": "Bachelor Parties",
+          "id": "marriage-advice",
+          "title": "Marriage Advice",
           "clues": [
             {
-              "id": "bachelor-parties-200",
+              "id": "marriage-advice-200",
               "value": 200,
-              "prompt": "In British English, a bachelor party is commonly called a stag party or what two-word term?",
-              "answer": "Stag night",
-              "notes": "Accept stag do."
+              "prompt": "According to old wedding advice, a bride should carry “something old, something new, something borrowed,” and this final something.",
+              "answer": "Something blue"
             },
             {
-              "id": "bachelor-parties-400",
+              "id": "marriage-advice-400",
               "value": 400,
-              "prompt": "In Australian English, a bachelor party is commonly called a buck's party or what kind of night?",
-              "answer": "Buck's night",
-              "notes": "Accept bucks night."
+              "prompt": "This engagement-ring “rule” says you should spend this many months’ salary, despite mostly being marketing nonsense.",
+              "answer": "Three months’ salary"
             },
             {
-              "id": "bachelor-parties-600",
+              "id": "marriage-advice-600",
               "value": 600,
-              "prompt": "According to common wedding planning etiquette, which wedding-party role usually leads bachelor party planning?",
-              "answer": "The best man",
-              "notes": "Accept best man."
+              "prompt": "This “love language” is less about gifts and more about doing the dishes before being asked like a functioning adult.",
+              "answer": "Acts of service"
             },
             {
-              "id": "bachelor-parties-800",
+              "id": "marriage-advice-800",
               "value": 800,
-              "prompt": "The term \"bachelor party\" is North American English; Oxford lists what British English term as its direct equivalent?",
-              "answer": "Stag night",
-              "notes": "Accept stag party."
+              "prompt": "This nickname is given to the first year of marriage, when people traditionally say everything is still sweet.",
+              "answer": "The honeymoon phase / honeymoon period"
             },
             {
-              "id": "bachelor-parties-1000",
+              "id": "marriage-advice-1000",
               "value": 1000,
-              "prompt": "Dictionary.com dates the origin of the phrase \"bachelor party\" to what decade range?",
-              "answer": "1920 to 1925",
-              "notes": "Accept the 1920s.",
-              "special": "wager"
+              "prompt": "This psychologist’s relationship advice includes avoiding the “Four Horsemen”: criticism, contempt, defensiveness, and stonewalling.",
+              "answer": "John Gottman"
+            }
+          ]
+        },
+        {
+          "id": "movie-dads",
+          "title": "Movie Dads",
+          "clues": [
+            {
+              "id": "movie-dads-200",
+              "value": 200,
+              "prompt": "This dad’s daughter is kidnapped in Paris, forcing him to unleash “a very particular set of skills.”",
+              "answer": "Bryan Mills"
+            },
+            {
+              "id": "movie-dads-400",
+              "value": 400,
+              "prompt": "This fish dad travels across the ocean to find his son after a scuba diver takes him from the Great Barrier Reef.",
+              "answer": "Marlin"
+            },
+            {
+              "id": "movie-dads-600",
+              "value": 600,
+              "prompt": "This 1993 movie dad disguises himself as a British nanny after losing custody access to his children.",
+              "answer": "Daniel Hillard / Mrs. Doubtfire"
+            },
+            {
+              "id": "movie-dads-800",
+              "value": 800,
+              "prompt": "This father tells his son, “A man who doesn’t spend time with his family can never be a real man.”",
+              "answer": "Vito Corleone"
+            },
+            {
+              "id": "movie-dads-1000",
+              "value": 1000,
+              "prompt": "This dad from American Pie somehow gives the most supportive advice in a movie built almost entirely out of bad decisions.",
+              "answer": "Noah Levenstein / Jim’s Dad"
             }
           ]
         }
@@ -517,12 +440,12 @@
               "value": 2000,
               "prompt": "What was the final message before the plans fell apart?",
               "answer": "Fill in the message or sender",
-              "special": "wager",
               "media": {
                 "type": "image",
                 "src": "/media/group-chat/final-message.png",
                 "alt": "Group chat final message screenshot"
-              }
+              },
+              "special": "wager"
             }
           ]
         },

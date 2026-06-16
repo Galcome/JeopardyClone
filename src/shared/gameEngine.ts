@@ -43,7 +43,10 @@ export function createInitialState(game: GameData): GameState {
     currentRoundIndex: 0,
     teams,
     players: [],
+    revealedCategoryIndex: -1,
     revealedClueIds: [],
+    lockedOutTeamIds: [],
+    controllingTeamId: null,
     activeClue: null,
     buzzersOpen: false,
     buzzes: [],
@@ -76,6 +79,7 @@ export function selectClue(
   next.screen = 'clue';
   next.activeClue = { roundId, categoryId, clueId, hostAnswerVisible: false, displayAnswerVisible: false };
   next.revealedClueIds = [...next.revealedClueIds, clueId];
+  next.lockedOutTeamIds = [];
   next.buzzersOpen = false;
   next.buzzes = [];
   next.message = clue.special === 'wager' ? 'Wager Tile' : undefined;
@@ -107,6 +111,7 @@ export function openBuzzers(state: GameState): GameState {
 
 export function registerBuzz(state: GameState, player: BuzzInput): GameState {
   if (!state.buzzersOpen || state.buzzes.length > 0) return state;
+  if (state.lockedOutTeamIds.includes(player.teamId)) return state;
   const team = state.teams.find((candidate) => candidate.id === player.teamId);
   if (!team) return state;
 
@@ -137,8 +142,9 @@ export function markCorrect(state: GameState, game: GameData, teamId: string): G
   let next = updateTeamScore(state, teamId, currentClueValue(state, game));
   next.screen = 'board';
   next.activeClue = null;
-  next.buzzersOpen = false;
   next.buzzes = [];
+  next.buzzersOpen = false;
+  next.controllingTeamId = teamId;
   next.message = 'Correct';
   return next;
 }
@@ -146,6 +152,7 @@ export function markCorrect(state: GameState, game: GameData, teamId: string): G
 export function markWrong(state: GameState, game: GameData, teamId: string, reopenBuzzers: boolean): GameState {
   let next = updateTeamScore(state, teamId, -currentClueValue(state, game));
   next.buzzes = [];
+  next.lockedOutTeamIds = [...next.lockedOutTeamIds, teamId];
   next.buzzersOpen = reopenBuzzers;
   next.message = reopenBuzzers ? 'Try another team' : 'Incorrect';
   return next;
@@ -155,9 +162,35 @@ export function returnToBoard(state: GameState): GameState {
   const next = cloneState(state);
   next.screen = 'board';
   next.activeClue = null;
+  next.lockedOutTeamIds = [];
   next.buzzersOpen = false;
   next.buzzes = [];
   next.message = undefined;
+  return next;
+}
+
+export function unrevealClue(state: GameState): GameState {
+  if (!state.activeClue) return state;
+  const next = cloneState(state);
+  next.revealedClueIds = next.revealedClueIds.filter(id => id !== state.activeClue!.clueId);
+  next.screen = 'board';
+  next.activeClue = null;
+  next.lockedOutTeamIds = [];
+  next.buzzersOpen = false;
+  next.buzzes = [];
+  next.message = 'Clue cancelled';
+  return next;
+}
+
+export function revealNextCategory(state: GameState, game: GameData): GameState {
+  const next = cloneState(state);
+  const round = game.rounds[next.currentRoundIndex];
+  if (round) {
+    const visibleCategoriesCount = round.categories.filter((cat) => !cat.hidden).length;
+    if (next.revealedCategoryIndex < visibleCategoriesCount - 1) {
+      next.revealedCategoryIndex += 1;
+    }
+  }
   return next;
 }
 
@@ -173,6 +206,32 @@ export function setSpecialWager(state: GameState, wager: number): GameState {
   return next;
 }
 
+export function previousRound(state: GameState, game: GameData): GameState {
+  const next = cloneState(state);
+  if (next.screen === 'final' || next.screen === 'standings') {
+    next.currentRoundIndex = game.rounds.length - 1;
+    next.screen = 'board';
+    next.activeClue = null;
+    next.buzzersOpen = false;
+    next.buzzes = [];
+    next.message = undefined;
+    return next;
+  }
+  
+  if (next.currentRoundIndex > 0) {
+    next.currentRoundIndex -= 1;
+    next.screen = 'board';
+    next.revealedCategoryIndex = -1;
+    next.activeClue = null;
+    next.controllingTeamId = null;
+    next.lockedOutTeamIds = [];
+    next.buzzersOpen = false;
+    next.buzzes = [];
+    next.message = undefined;
+  }
+  return next;
+}
+
 export function advanceRound(state: GameState, game: GameData): GameState {
   if (state.currentRoundIndex + 1 >= game.rounds.length) {
     return startFinal(state);
@@ -181,7 +240,10 @@ export function advanceRound(state: GameState, game: GameData): GameState {
   const next = cloneState(state);
   next.currentRoundIndex += 1;
   next.screen = 'round-transition';
+  next.revealedCategoryIndex = -1;
   next.activeClue = null;
+  next.controllingTeamId = null;
+  next.lockedOutTeamIds = [];
   next.buzzersOpen = false;
   next.buzzes = [];
   next.message = game.rounds[next.currentRoundIndex].transitionTitle ?? game.rounds[next.currentRoundIndex].title;
@@ -200,6 +262,8 @@ export function startFinal(state: GameState): GameState {
   next.screen = 'final';
   next.finalPhase = 'wagering';
   next.activeClue = null;
+  next.controllingTeamId = null;
+  next.lockedOutTeamIds = [];
   next.buzzersOpen = false;
   next.buzzes = [];
   next.message = 'Final Challenge';

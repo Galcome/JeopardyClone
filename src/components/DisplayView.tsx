@@ -1,4 +1,5 @@
-import { Trophy } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Trophy, VolumeX } from 'lucide-react';
 import type { PublicStatePayload } from '../shared/types';
 import { Board } from './Board';
 import { CluePanel } from './CluePanel';
@@ -13,12 +14,60 @@ export function DisplayView({ payload }: DisplayViewProps): JSX.Element {
   const { game, state } = payload;
   const round = game.rounds[state.currentRoundIndex] ?? game.rounds[0];
 
+  const [audioUnlocked, setAudioUnlocked] = useState(() => {
+    return typeof navigator !== 'undefined' && !!(navigator as any).userActivation?.hasBeenActive;
+  });
+
+  useEffect(() => {
+    if (audioUnlocked) return;
+    const unlock = () => {
+      setAudioUnlocked(true);
+      window.removeEventListener('click', unlock);
+      window.removeEventListener('keydown', unlock);
+    };
+    window.addEventListener('click', unlock);
+    window.addEventListener('keydown', unlock);
+    return () => {
+      window.removeEventListener('click', unlock);
+      window.removeEventListener('keydown', unlock);
+    };
+  }, [audioUnlocked]);
+
   return (
     <main className="display-layout">
-      {(state.screen === 'board' || state.screen === 'setup') && (
+      {!audioUnlocked && (
+        <div 
+          className="audio-unlock-overlay"
+          onClick={() => setAudioUnlocked(true)}
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            right: '24px',
+            background: 'rgba(239, 68, 68, 0.95)',
+            color: 'white',
+            padding: '12px 20px',
+            borderRadius: '12px',
+            boxShadow: '0 8px 24px rgba(239, 68, 68, 0.3)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            cursor: 'pointer',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            transition: 'transform 0.2s ease',
+            border: '2px solid rgba(255, 255, 255, 0.2)'
+          }}
+        >
+          <VolumeX size={20} />
+          <span>Click anywhere to enable game sounds</span>
+        </div>
+      )}
+      {state.screen === 'board' && (
         <>
-          <Board game={game} round={round} revealedClueIds={state.revealedClueIds} />
-          <Scoreboard teams={state.teams} />
+          <Board game={game} round={{ ...round, categories: round.categories.filter(c => !c.hidden) }} revealedCategoryIndex={state.revealedCategoryIndex} revealedClueIds={state.revealedClueIds} />
+          <Scoreboard teams={state.teams} players={state.players} selectedTeamId={state.controllingTeamId ?? undefined} />
         </>
       )}
 
@@ -50,7 +99,7 @@ export function DisplayView({ payload }: DisplayViewProps): JSX.Element {
         <section className="display-standings">
           <Trophy size={72} />
           <h1>Final Standings</h1>
-          <Scoreboard teams={[...state.teams].sort((a, b) => b.score - a.score)} />
+          <Scoreboard teams={[...state.teams].sort((a, b) => b.score - a.score)} players={state.players} />
         </section>
       )}
     </main>

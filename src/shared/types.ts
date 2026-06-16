@@ -20,6 +20,7 @@ export interface Clue {
 export interface Category {
   id: string;
   title: string;
+  hidden?: boolean;
   clues: Clue[];
 }
 
@@ -90,13 +91,18 @@ export interface GameState {
   currentRoundIndex: number;
   teams: Team[];
   players: Player[];
+  revealedCategoryIndex: number;
   revealedClueIds: string[];
+  lockedOutTeamIds: string[];
+  controllingTeamId: string | null;
   activeClue: ActiveClue | null;
   buzzersOpen: boolean;
   buzzes: Buzz[];
   finalPhase: FinalPhase;
   finalResults: Record<string, FinalTeamResult>;
   message?: string;
+  timerStartedAt?: number | null;
+  timerSeconds?: number;
 }
 
 export interface PublicGameState extends Omit<GameState, 'activeClue'> {
@@ -137,14 +143,23 @@ export type HostCommand =
   | { type: 'adjust-score'; teamId: string; delta: number }
   | { type: 'set-special-wager'; wager: number }
   | { type: 'advance-round' }
+  | { type: 'previous-round' }
+  | { type: 'unreveal-clue' }
+  | { type: 'reveal-next-category' }
+  | { type: 'save-state' }
+  | { type: 'reset-game' }
   | { type: 'start-final' }
   | { type: 'reveal-final' }
   | { type: 'set-final-wager'; teamId: string; wager: number }
-  | { type: 'resolve-final-team'; teamId: string; correct: boolean };
+  | { type: 'resolve-final-team'; teamId: string; correct: boolean }
+  | { type: 'test-sound'; soundName: string }
+  | { type: 'start-timer'; seconds?: number }
+  | { type: 'stop-timer' };
 
 export type ClientToServerEvents = {
   'host:auth': (payload: HostAuthPayload, callback: (result: { ok: boolean; message?: string }) => void) => void;
   'host:command': (command: HostCommand) => void;
+  'host:update-game': (game: GameData, callback: (result: { ok: boolean; message?: string }) => void) => void;
   'player:join': (payload: JoinPayload, callback: (result: { ok: boolean; playerId?: string; message?: string }) => void) => void;
   'player:buzz': () => void;
   'state:request': () => void;
