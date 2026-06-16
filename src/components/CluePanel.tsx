@@ -49,8 +49,12 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
       } else {
         if (!hostMode && playedSoundFor !== startedAt) {
           setPlayedSoundFor(startedAt);
-          const audio = new Audio('/sounds/buzz.mp3');
-          audio.play().catch(() => {});
+          if (typeof (window as any).playLocalSound === 'function') {
+            (window as any).playLocalSound('buzz');
+          } else {
+            const audio = new Audio('/sounds/buzz.mp3');
+            audio.play().catch(() => {});
+          }
         }
       }
     };

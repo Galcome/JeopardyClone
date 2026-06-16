@@ -19,16 +19,49 @@ export function App(): JSX.Element {
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    let activeAudio: HTMLAudioElement | null = null;
+
     const playSound = (soundName: string) => {
       if (routeName() !== 'display') return;
+
+      // Stop previous active audio to prevent overlap
+      if (activeAudio) {
+        activeAudio.pause();
+        activeAudio.currentTime = 0;
+      }
+
       const audio = new Audio(`/sounds/${soundName}.mp3`);
+      activeAudio = audio;
+
       audio.play().catch(() => {});
+
+      audio.addEventListener('ended', () => {
+        if (activeAudio === audio) {
+          activeAudio = null;
+        }
+      });
+    };
+
+    const stopAllSounds = () => {
+      if (routeName() !== 'display') return;
+      if (activeAudio) {
+        activeAudio.pause();
+        activeAudio.currentTime = 0;
+        activeAudio = null;
+      }
+    };
+
+    // Register a global helper so local UI playbacks (e.g. countdown timers)
+    // route through the exact same exclusive playback engine.
+    (window as any).playLocalSound = (soundName: string) => {
+      playSound(soundName);
     };
 
     socket.on('public:state', setPublicPayload);
     socket.on('host:state', setHostPayload);
     socket.on('server:message', setMessage);
     socket.on('play-sound', playSound);
+    socket.on('stop-all-sounds', stopAllSounds);
     socket.emit('state:request');
 
     return () => {
@@ -36,7 +69,14 @@ export function App(): JSX.Element {
       socket.off('host:state', setHostPayload);
       socket.off('server:message', setMessage);
       socket.off('play-sound', playSound);
+      socket.off('stop-all-sounds', stopAllSounds);
       socket.disconnect();
+      delete (window as any).playLocalSound;
+      
+      if (activeAudio) {
+        activeAudio.pause();
+        activeAudio = null;
+      }
     };
   }, [socket]);
 

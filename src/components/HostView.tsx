@@ -98,6 +98,7 @@ export function HostView({ publicPayload, hostPayload, socket, message, sendComm
             <button type="button" style={{ fontSize: '0.75rem', padding: '6px' }} onClick={() => sendCommand({ type: 'test-sound', soundName: 'daily_double' })}>Daily Double</button>
             <button type="button" style={{ fontSize: '0.75rem', padding: '6px' }} onClick={() => sendCommand({ type: 'test-sound', soundName: 'final_jeopardy' })}>Final Theme</button>
             <button type="button" style={{ fontSize: '0.75rem', padding: '6px', gridColumn: 'span 2' }} onClick={() => sendCommand({ type: 'test-sound', soundName: 'buzz' })}>Buzzer SFX</button>
+            <button type="button" style={{ fontSize: '0.75rem', padding: '6px', gridColumn: 'span 2', background: '#ef4444', color: 'white', fontWeight: 'bold', border: 'none', borderRadius: '4px', cursor: 'pointer' }} onClick={() => sendCommand({ type: 'stop-all-sounds' })}>🛑 Stop All Sounds</button>
           </div>
           <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginTop: '2px' }}>
             Sounds play on the <strong>Display</strong> screen

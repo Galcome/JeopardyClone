@@ -154,7 +154,8 @@ export type HostCommand =
   | { type: 'resolve-final-team'; teamId: string; correct: boolean }
   | { type: 'test-sound'; soundName: string }
   | { type: 'start-timer'; seconds?: number }
-  | { type: 'stop-timer' };
+  | { type: 'stop-timer' }
+  | { type: 'stop-all-sounds' };
 
 export type ClientToServerEvents = {
   'host:auth': (payload: HostAuthPayload, callback: (result: { ok: boolean; message?: string }) => void) => void;

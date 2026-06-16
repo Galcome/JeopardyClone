@@ -184,6 +184,8 @@ function applyCommand(command: HostCommand) {
     case 'stop-timer':
       state.timerStartedAt = null;
       break;
+    case 'stop-all-sounds':
+      break;
   }
 }
 
@@ -219,6 +221,7 @@ io.on('connection', (socket) => {
       if (command.type === 'select-clue' && state.message === 'Wager Tile') io.emit('play-sound', 'daily_double');
       if (command.type === 'start-final') io.emit('play-sound', 'final_jeopardy');
       if (command.type === 'test-sound') io.emit('play-sound', command.soundName);
+      if (command.type === 'stop-all-sounds') io.emit('stop-all-sounds');
 
       emitState();
       try {
