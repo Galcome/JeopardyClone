@@ -59,6 +59,21 @@ export function App(): JSX.Element {
       }
     };
 
+    const controlMedia = (action: 'play' | 'pause' | 'restart') => {
+      if (routeName() !== 'display') return;
+      const mediaEl = document.querySelector('audio, video') as HTMLMediaElement | null;
+      if (mediaEl) {
+        if (action === 'play') {
+          mediaEl.play().catch(() => {});
+        } else if (action === 'pause') {
+          mediaEl.pause();
+        } else if (action === 'restart') {
+          mediaEl.currentTime = 0;
+          mediaEl.play().catch(() => {});
+        }
+      }
+    };
+
     // Register a global helper so local UI playbacks (e.g. countdown timers)
     // route through the exact same exclusive playback engine.
     (window as any).playLocalSound = (soundName: string) => {
@@ -70,6 +85,7 @@ export function App(): JSX.Element {
     socket.on('server:message', setMessage);
     socket.on('play-sound', playSound);
     socket.on('stop-all-sounds', stopAllSounds);
+    socket.on('control-media', controlMedia);
     socket.emit('state:request');
 
     return () => {
@@ -78,6 +94,7 @@ export function App(): JSX.Element {
       socket.off('server:message', setMessage);
       socket.off('play-sound', playSound);
       socket.off('stop-all-sounds', stopAllSounds);
+      socket.off('control-media', controlMedia);
       socket.disconnect();
       delete (window as any).playLocalSound;
       

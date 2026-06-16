@@ -191,6 +191,8 @@ function applyCommand(command: HostCommand) {
         state.activeClue = { ...state.activeClue, mediaVisible: true };
       }
       break;
+    case 'control-media':
+      break;
   }
 }
 
@@ -227,6 +229,7 @@ io.on('connection', (socket) => {
       if (command.type === 'start-final') io.emit('play-sound', 'final_jeopardy');
       if (command.type === 'test-sound') io.emit('play-sound', command.soundName);
       if (command.type === 'stop-all-sounds') io.emit('stop-all-sounds');
+      if (command.type === 'control-media') io.emit('control-media', command.action);
 
       emitState();
       try {

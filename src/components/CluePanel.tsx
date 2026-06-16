@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Eye, MonitorUp, Play, RotateCcw, Square, ThumbsDown, ThumbsUp, Volume2 } from 'lucide-react';
+import { Eye, MonitorUp, Pause, Play, RotateCcw, Square, ThumbsDown, ThumbsUp, Volume2 } from 'lucide-react';
 import { findClue } from '../shared/gameData';
 import type { GameData, GameState, HostCommand } from '../shared/types';
 import { MediaFrame } from './MediaFrame';
@@ -230,6 +230,23 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
               <MonitorUp size={18} /> Reveal to Display
             </button>
           </div>
+
+          {clue.media && (clue.media.type === 'audio' || clue.media.type === 'video') && (
+            <div className="control-group">
+              <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'rgba(255,255,255,0.6)', display: 'block', marginBottom: '4px' }}>Clue Media Remote</span>
+              <div style={{ display: 'flex', gap: '0.4rem' }}>
+                <button type="button" onClick={() => sendCommand({ type: 'control-media', action: 'play' })} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 0' }}>
+                  <Play size={16} /> Play
+                </button>
+                <button type="button" onClick={() => sendCommand({ type: 'control-media', action: 'pause' })} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 0' }}>
+                  <Pause size={16} /> Pause
+                </button>
+                <button type="button" onClick={() => sendCommand({ type: 'control-media', action: 'restart' })} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 0' }}>
+                  <RotateCcw size={16} /> Restart
+                </button>
+              </div>
+            </div>
+          )}
 
           <div className="control-group">
             <button type="button" onClick={() => sendCommand({ type: 'open-buzzers' })}>

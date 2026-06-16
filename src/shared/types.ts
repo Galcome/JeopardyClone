@@ -157,7 +157,8 @@ export type HostCommand =
   | { type: 'start-timer'; seconds?: number }
   | { type: 'stop-timer' }
   | { type: 'stop-all-sounds' }
-  | { type: 'reveal-media' };
+  | { type: 'reveal-media' }
+  | { type: 'control-media'; action: 'play' | 'pause' | 'restart' };
 
 export type ClientToServerEvents = {
   'host:auth': (payload: HostAuthPayload, callback: (result: { ok: boolean; message?: string }) => void) => void;

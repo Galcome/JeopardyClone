@@ -331,6 +331,62 @@
           ]
         },
         {
+          "id": "name-that-sound",
+          "title": "Name That Sound",
+          "clues": [
+            {
+              "id": "name-that-sound-400",
+              "value": 400,
+              "prompt": "Identify this legendary video game series sound effect.",
+              "answer": "What is The Legend of Zelda",
+              "media": {
+                "type": "audio",
+                "src": "/media/zelda.mp3"
+              }
+            },
+            {
+              "id": "name-that-sound-800",
+              "value": 800,
+              "prompt": "Identify the video game franchise associated with this alert sound.",
+              "answer": "What is Metal Gear Solid",
+              "media": {
+                "type": "audio",
+                "src": "/media/metal_gear.mp3"
+              }
+            },
+            {
+              "id": "name-that-sound-1200",
+              "value": 1200,
+              "prompt": "Identify the popular video game associated with this theme sound.",
+              "answer": "What is Super Smash Bros",
+              "media": {
+                "type": "audio",
+                "src": "/media/smash_bros.mp3"
+              }
+            },
+            {
+              "id": "name-that-sound-1600",
+              "value": 1600,
+              "prompt": "Identify the massive online multiplayer game that plays this iconic sound upon achieving a milestone.",
+              "answer": "What is World of Warcraft",
+              "media": {
+                "type": "audio",
+                "src": "/media/warcraft_lvl_up.mp3"
+              }
+            },
+            {
+              "id": "name-that-sound-2000",
+              "value": 2000,
+              "prompt": "Identify this classic sci-fi shooter game series sound effect.",
+              "answer": "What is Halo",
+              "media": {
+                "type": "audio",
+                "src": "/media/halo.mp3"
+              }
+            }
+          ]
+        },
+        {
           "id": "movie-lines",
           "title": "Movie Lines",
           "clues": [
