@@ -295,6 +295,42 @@
           ]
         },
         {
+          "id": "at-the-movies-new",
+          "title": "At the Movies",
+          "clues": [
+            {
+              "id": "at-the-movies-400",
+              "value": 400,
+              "prompt": "The fake name on the Hawaiian driver's license used to successfully buy alcohol in Superbad.",
+              "answer": "What is McLovin"
+            },
+            {
+              "id": "at-the-movies-800",
+              "value": 800,
+              "prompt": "This legendary game show host famously brawls with Adam Sandler on the golf course in Happy Gilmore.",
+              "answer": "Who is Bob Barker"
+            },
+            {
+              "id": "at-the-movies-1200",
+              "value": 1200,
+              "prompt": "This 2001 WWII sniper film is controversially considered by some in this room to feature the greatest sex scene in cinema history.",
+              "answer": "What is Enemy at the Gates"
+            },
+            {
+              "id": "at-the-movies-1600",
+              "value": 1600,
+              "prompt": "The name of the specific Las Vegas hotel and casino where the wolfpack stays in The Hangover.",
+              "answer": "What is Caesars Palace"
+            },
+            {
+              "id": "at-the-movies-2000",
+              "value": 2000,
+              "prompt": "The name of the Los Angeles skyscraper seized by Hans Gruber and his men in Die Hard.",
+              "answer": "What is Nakatomi Plaza"
+            }
+          ]
+        },
+        {
           "id": "movie-lines",
           "title": "Movie Lines",
           "clues": [
