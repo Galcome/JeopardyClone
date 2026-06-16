@@ -78,6 +78,7 @@ export interface ActiveClue {
   wager?: number;
   hostAnswerVisible: boolean;
   displayAnswerVisible: boolean;
+  mediaVisible?: boolean;
 }
 
 export interface FinalTeamResult {
@@ -155,7 +156,8 @@ export type HostCommand =
   | { type: 'test-sound'; soundName: string }
   | { type: 'start-timer'; seconds?: number }
   | { type: 'stop-timer' }
-  | { type: 'stop-all-sounds' };
+  | { type: 'stop-all-sounds' }
+  | { type: 'reveal-media' };
 
 export type ClientToServerEvents = {
   'host:auth': (payload: HostAuthPayload, callback: (result: { ok: boolean; message?: string }) => void) => void;

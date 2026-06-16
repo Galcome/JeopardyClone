@@ -77,7 +77,7 @@ export function selectClue(
 
   const next = cloneState(state);
   next.screen = 'clue';
-  next.activeClue = { roundId, categoryId, clueId, hostAnswerVisible: false, displayAnswerVisible: false };
+  next.activeClue = { roundId, categoryId, clueId, hostAnswerVisible: false, displayAnswerVisible: false, mediaVisible: false };
   next.revealedClueIds = [...next.revealedClueIds, clueId];
   next.lockedOutTeamIds = [];
   next.buzzersOpen = false;

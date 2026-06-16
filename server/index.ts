@@ -186,6 +186,11 @@ function applyCommand(command: HostCommand) {
       break;
     case 'stop-all-sounds':
       break;
+    case 'reveal-media':
+      if (state.activeClue) {
+        state.activeClue = { ...state.activeClue, mediaVisible: true };
+      }
+      break;
   }
 }
 

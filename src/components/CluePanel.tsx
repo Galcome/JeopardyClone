@@ -147,7 +147,31 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
             {isWager && <div className="special-banner">Daily Double</div>}
             <p className="clue-value">{wagerSet ? `Wager ${active.wager}` : `${clue.value}`}</p>
             <h1>{clue.prompt}</h1>
-            <MediaFrame media={clue.media} />
+            {clue.media && (
+              (hostMode || clue.media.type !== 'image' || active.mediaVisible || active.displayAnswerVisible) ? (
+                <MediaFrame media={clue.media} />
+              ) : (
+                <div className="media-hidden-placeholder" style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '12px',
+                  width: '100%',
+                  maxWidth: '320px',
+                  margin: '20px auto 0 auto',
+                  padding: '20px',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  borderRadius: '10px',
+                  border: '2px dashed rgba(255, 255, 255, 0.15)',
+                  color: 'rgba(255, 255, 255, 0.4)',
+                  fontFamily: 'system-ui, -apple-system, sans-serif'
+                }}>
+                  <span style={{ fontSize: '1.8rem' }}>🖼️</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Image Hidden</span>
+                </div>
+              )
+            )}
           </>
         )}
         {!hostMode && state.buzzes[0] && (
@@ -188,6 +212,15 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
                 <strong>{clue.answer}</strong>
                 {clue.notes && <p>{clue.notes}</p>}
               </div>
+            )}
+            {clue.media && clue.media.type === 'image' && !active.mediaVisible && (
+              <button
+                type="button"
+                onClick={() => sendCommand({ type: 'reveal-media' })}
+                style={{ marginBottom: '0.5rem', background: 'var(--gold, #ffd166)', color: '#000', fontWeight: 'bold' }}
+              >
+                <Eye size={18} /> Reveal Image
+              </button>
             )}
             <button
               type="button"
