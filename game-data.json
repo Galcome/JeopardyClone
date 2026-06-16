@@ -93,32 +93,32 @@
             {
               "id": "barstool-science-200",
               "value": 200,
-              "prompt": "True or false: Searing a steak “locks in the juices.”",
-              "answer": "False"
+              "prompt": "A popular but debunked culinary myth claims that searing a steak at high heat \"locks in\" these.",
+              "answer": "What are juices"
             },
             {
               "id": "barstool-science-400",
               "value": 400,
-              "prompt": "True or false: You need to wait 30 minutes after eating before swimming to avoid dangerous cramps.",
-              "answer": "False"
+              "prompt": "An old wives' tale falsely warns that you must wait 30 minutes after a meal before doing this physical activity.",
+              "answer": "What is swimming"
             },
             {
               "id": "barstool-science-600",
               "value": 600,
-              "prompt": "This common grooming act is blamed for making hair grow back thicker, even though it does not actually change hair thickness.",
-              "answer": "Shaving"
+              "prompt": "This grooming act is falsely blamed for making your hair grow back thicker and darker.",
+              "answer": "What is shaving"
             },
             {
               "id": "barstool-science-800",
               "value": 800,
-              "prompt": "True or false: “Beer before liquor, never been sicker” is a reliable rule for avoiding hangovers.",
-              "answer": "False"
+              "prompt": "A completely unscientific drinking rhyme claims that consuming this specific beverage \"before liquor\" guarantees you've \"never been sicker\".",
+              "answer": "What is beer"
             },
             {
               "id": "barstool-science-1000",
               "value": 1000,
-              "prompt": "This form of training is often blamed for “killing your gains,” despite being useful when programmed properly.",
-              "answer": "Cardio"
+              "prompt": "Gym bros often falsely accuse this heart-pumping form of exercise of \"killing your gains\".",
+              "answer": "What is cardio"
             }
           ]
         },
@@ -129,32 +129,32 @@
             {
               "id": "dynamic-duo-200",
               "value": 200,
-              "prompt": "This outlaw duo’s crime spree ended in a police ambush in Louisiana in 1934.",
-              "answer": "Bonnie and Clyde"
+              "prompt": "This infamous outlaw duo’s crime spree ended in a fatal 1934 police ambush.",
+              "answer": "Who are Bonnie and Clyde."
             },
             {
               "id": "dynamic-duo-400",
               "value": 400,
-              "prompt": "This comedy duo’s sketch show gave us Obama’s anger translator Luther and the East/West Bowl names.",
-              "answer": "Key and Peele"
+              "prompt": "This sketch comedy duo gave the world Barack Obama’s anger translator, Luther.",
+              "answer": "Who are Key and Peele"
             },
             {
               "id": "dynamic-duo-600",
               "value": 600,
-              "prompt": "This duo created South Park, The Book of Mormon, and a lifetime supply of angry parent complaints.",
-              "answer": "Trey Parker and Matt Stone"
+              "prompt": "This creative duo is responsible for both the hit animated series South Park and the Broadway musical The Book of Mormon.",
+              "answer": "Who are Trey Parker and Matt Stone"
             },
             {
               "id": "dynamic-duo-800",
               "value": 800,
               "prompt": "This Las Vegas magic duo is known for comedy, skepticism, and one partner almost never speaking on stage.",
-              "answer": "Penn and Teller"
+              "answer": "Who are Penn and Teller"
             },
             {
               "id": "dynamic-duo-1000",
               "value": 1000,
-              "prompt": "This duo’s names are attached to a famous Wall Street index that still exists today.",
-              "answer": "Dow Jones"
+              "prompt": "These two surnames make up the title of the most widely followed stock market index on Wall Street.",
+              "answer": "Who are Dow Jones"
             }
           ]
         },
@@ -183,14 +183,14 @@
             {
               "id": "marriage-advice-800",
               "value": 800,
-              "prompt": "This nickname is given to the first year of marriage, when people traditionally say everything is still sweet.",
-              "answer": "The honeymoon phase / honeymoon period"
+              "prompt": "This popular four-word rhyming mantra is universally handed down by older guys as the ultimate secret to a peaceful marriage.",
+              "answer": "What is happy wife, happy life"
             },
             {
               "id": "marriage-advice-1000",
               "value": 1000,
-              "prompt": "This psychologist’s relationship advice includes avoiding the “Four Horsemen”: criticism, contempt, defensiveness, and stonewalling.",
-              "answer": "John Gottman"
+              "prompt": "Traditional marriage rules dictate that gifts for your very first wedding anniversary should be made entirely out of this everyday material.",
+              "answer": "What is paper"
             }
           ]
         },
@@ -201,32 +201,32 @@
             {
               "id": "movie-dads-200",
               "value": 200,
-              "prompt": "This dad’s daughter is kidnapped in Paris, forcing him to unleash “a very particular set of skills.”",
-              "answer": "Bryan Mills"
+              "prompt": "This dad unleashes a \"very particular set of skills\" after his daughter is taken in Paris.",
+              "answer": "Who is Bryan Mills (or Liam Neeson)"
             },
             {
               "id": "movie-dads-400",
               "value": 400,
-              "prompt": "This fish dad travels across the ocean to find his son after a scuba diver takes him from the Great Barrier Reef.",
-              "answer": "Marlin"
+              "prompt": "This frantic clownfish travels across the ocean to find his son at the Great Barrier Reef.",
+              "answer": "Who is Marlin (or Albert Brooks)"
             },
             {
               "id": "movie-dads-600",
               "value": 600,
-              "prompt": "This 1993 movie dad disguises himself as a British nanny after losing custody access to his children.",
-              "answer": "Daniel Hillard / Mrs. Doubtfire"
+              "prompt": "This movie dad disguised himself as an elderly British nanny just to spend time with his kids.",
+              "answer": "Who is Daniel Hillard / Mrs. Doubtfire (or Robin Williams)"
             },
             {
               "id": "movie-dads-800",
               "value": 800,
               "prompt": "This father tells his son, “A man who doesn’t spend time with his family can never be a real man.”",
-              "answer": "Vito Corleone"
+              "answer": "Who is Vito Corleone (or Marlon Brando)"
             },
             {
               "id": "movie-dads-1000",
               "value": 1000,
-              "prompt": "This dad from American Pie somehow gives the most supportive advice in a movie built almost entirely out of bad decisions.",
-              "answer": "Noah Levenstein / Jim’s Dad"
+              "prompt": "This wildly supportive American Pie dad is usually referred to simply as \"Jim’s Dad\".",
+              "answer": "Who is Noah Levenstein (or Eugene Levy)"
             }
           ]
         }
@@ -238,6 +238,62 @@
       "transitionTitle": "Round Two Hits Harder",
       "valuePrefix": "$",
       "categories": [
+        {
+          "id": "the-mandela-effect",
+          "title": "The Mandela Effect",
+          "clues": [
+            {
+              "id": "mandela-effect-400",
+              "value": 400,
+              "prompt": "The exact, five-word revelation Darth Vader speaks to Luke during the climax of The Empire Strikes Back.",
+              "answer": "What is \"No, I am your father\"",
+              "media": {
+                "type": "video",
+                "src": "/media/darth_vader.mp4"
+              }
+            },
+            {
+              "id": "mandela-effect-800",
+              "value": 800,
+              "prompt": "The correct, official spelling of the Kellogg's brightly colored, ring-shaped breakfast cereal.",
+              "answer": "What is Froot Loops",
+              "media": {
+                "type": "image",
+                "src": "/media/froot_loops.avif"
+              }
+            },
+            {
+              "id": "mandela-effect-1200",
+              "value": 1200,
+              "prompt": "The exact, five-word phrase the Evil Queen uses to call upon her reflection in Disney's Snow White.",
+              "answer": "What is \"Magic mirror on the wall\"",
+              "media": {
+                "type": "video",
+                "src": "/media/magic_mirror.mp4"
+              }
+            },
+            {
+              "id": "mandela-effect-1600",
+              "value": 1600,
+              "prompt": "The official color of the very tip of Pikachu's tail in the Pokémon franchise.",
+              "answer": "What is yellow",
+              "media": {
+                "type": "image",
+                "src": "/media/pikachu.png"
+              }
+            },
+            {
+              "id": "mandela-effect-2000",
+              "value": 2000,
+              "prompt": "The brand of peanut butter that inspired our friend's \"peanut butter and crackers\" nickname.",
+              "answer": "What is Jif",
+              "media": {
+                "type": "image",
+                "src": "/media/jif.avif"
+              }
+            }
+          ]
+        },
         {
           "id": "movie-lines",
           "title": "Movie Lines",
