@@ -23,9 +23,11 @@ export function App(): JSX.Element {
 
     const playSound = (soundName: string) => {
       if (routeName() !== 'display') return;
+      console.log(`[SoundEngine] playSound received: ${soundName}`);
 
       // Stop previous active audio to prevent overlap
       if (activeAudio) {
+        console.log('[SoundEngine] Stopping previous active audio:', activeAudio.src);
         activeAudio.pause();
         activeAudio.currentTime = 0;
       }
@@ -33,9 +35,13 @@ export function App(): JSX.Element {
       const audio = new Audio(`/sounds/${soundName}.mp3`);
       activeAudio = audio;
 
-      audio.play().catch(() => {});
+      console.log('[SoundEngine] Playing new audio:', audio.src);
+      audio.play().catch((err) => {
+        console.error('[SoundEngine] Play failed:', err);
+      });
 
       audio.addEventListener('ended', () => {
+        console.log('[SoundEngine] Audio ended:', audio.src);
         if (activeAudio === audio) {
           activeAudio = null;
         }
@@ -44,7 +50,9 @@ export function App(): JSX.Element {
 
     const stopAllSounds = () => {
       if (routeName() !== 'display') return;
+      console.log(`[SoundEngine] stopAllSounds received. Active audio exists: ${!!activeAudio}`);
       if (activeAudio) {
+        console.log('[SoundEngine] Pausing and resetting active audio:', activeAudio.src);
         activeAudio.pause();
         activeAudio.currentTime = 0;
         activeAudio = null;

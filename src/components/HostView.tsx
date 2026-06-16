@@ -33,8 +33,39 @@ export function HostView({ publicPayload, hostPayload, socket, message, sendComm
     QRCode.toDataURL(joinUrl, { margin: 1, width: 160 }).then(setQr).catch(() => setQr(''));
   }, [hostPayload?.joinUrl]);
 
+  // Handle automatic re-authentication if the socket reconnects or page refreshes
+  useEffect(() => {
+    const savedPin = sessionStorage.getItem('host_pin');
+    if (savedPin && !hostPayload) {
+      socket.emit('host:auth', { pin: savedPin }, (result) => {
+        if (!result.ok) {
+          sessionStorage.removeItem('host_pin');
+        }
+      });
+    }
+
+    const handleConnect = () => {
+      const pin = sessionStorage.getItem('host_pin');
+      if (pin) {
+        socket.emit('host:auth', { pin }, (result) => {
+          if (!result.ok) {
+            sessionStorage.removeItem('host_pin');
+          }
+        });
+      }
+    };
+
+    socket.on('connect', handleConnect);
+    return () => {
+      socket.off('connect', handleConnect);
+    };
+  }, [socket, hostPayload]);
+
   function authenticate() {
     socket.emit('host:auth', { pin }, (result) => {
+      if (result.ok) {
+        sessionStorage.setItem('host_pin', pin);
+      }
       setAuthError(result.ok ? null : result.message ?? 'Incorrect PIN');
     });
   }

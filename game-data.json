@@ -22,19 +22,19 @@
               "id": "bread-200",
               "value": 200,
               "prompt": "At its simplest, bread is usually made from these four core ingredients.",
-              "answer": "Flour, water, yeast, and salt"
+              "answer": "What is flour, water, yeast, and salt"
             },
             {
               "id": "bread-400",
               "value": 400,
               "prompt": "This dense, dark German rye bread is traditionally baked low and slow, giving it its deep colour and rich flavour.",
-              "answer": "Pumpernickel"
+              "answer": "What is pumpernickel"
             },
             {
               "id": "bread-600",
               "value": 600,
               "prompt": "The process of leaving dough to rest so gluten can relax and yeast can ferment is known by this term.",
-              "answer": "Proofing (or Autolyse)"
+              "answer": "What is Proofing (or Autolyse)"
             },
             {
               "id": "bread-800",
@@ -46,7 +46,7 @@
               "id": "bread-1000",
               "value": 1000,
               "prompt": "Often called the \"soul\" of a artisanal bakery, this is the industry term for a live fermented mixture of flour and water that is meticulously fed and kept alive for years to rise endless batches of bread.",
-              "answer": "Sourdough Starter (or Mother Dough)"
+              "answer": "What is Sourdough Starter (or Mother Dough)"
             }
           ]
         },
