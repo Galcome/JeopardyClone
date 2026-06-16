@@ -76,22 +76,48 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
       <div className="clue-main">
         {remaining !== null && (
           <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '8px',
             width: '100%',
-            height: '8px',
-            background: 'rgba(255, 255, 255, 0.1)',
-            borderRadius: '4px',
-            overflow: 'hidden',
-            marginBottom: '20px',
-            position: 'relative'
+            maxWidth: '500px',
+            margin: '0 auto 24px auto',
+            padding: '8px',
+            background: 'rgba(0, 0, 0, 0.5)',
+            borderRadius: '10px',
+            border: '2px solid rgba(255, 255, 255, 0.15)',
+            boxShadow: 'inset 0 4px 15px rgba(0,0,0,0.8)',
+            position: 'relative',
+            height: '42px',
+            boxSizing: 'border-box'
           }}>
-            <div style={{
-              width: `${(remaining / (state.timerSeconds ?? 5)) * 100}%`,
-              height: '100%',
-              background: remaining > 2 ? 'var(--gold, #ffd166)' : 'var(--red, #ef476f)',
-              transition: 'width 0.1s linear',
-              borderRadius: '4px'
-            }} />
-            {remaining === 0 && (
+            {remaining > 0 ? (
+              Array.from({ length: 10 }).map((_, idx) => {
+                const threshold = (idx + 1) * 0.5;
+                const isOn = remaining >= threshold;
+                const isCritical = remaining <= 1.5;
+                const onColor = isCritical ? '#ef476f' : '#ffd166';
+                const glowColor = isCritical ? 'rgba(239, 71, 111, 0.6)' : 'rgba(255, 209, 102, 0.6)';
+                
+                // Pulsing flashing effect when critical
+                const isFlashing = isCritical && isOn && Math.floor(remaining * 6) % 2 === 0;
+
+                return (
+                  <div
+                    key={idx}
+                    style={{
+                      flex: 1,
+                      height: '100%',
+                      borderRadius: '4px',
+                      backgroundColor: isOn ? (isFlashing ? 'rgba(239, 71, 111, 0.2)' : onColor) : '#151522',
+                      border: isOn ? `1px solid ${onColor}` : '1px solid rgba(255, 255, 255, 0.05)',
+                      boxShadow: isOn && !isFlashing ? `0 0 10px ${glowColor}, inset 0 1px 3px rgba(255,255,255,0.4)` : 'inset 0 1px 3px rgba(0,0,0,0.8)',
+                      transition: 'background-color 0.05s ease, box-shadow 0.05s ease'
+                    }}
+                  />
+                );
+              })
+            ) : (
               <div style={{
                 position: 'absolute',
                 top: 0,
@@ -101,14 +127,15 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: 'rgba(239, 71, 111, 0.2)',
+                background: 'rgba(239, 71, 111, 0.15)',
                 color: '#ef476f',
-                fontSize: '0.8rem',
+                fontSize: '1rem',
                 fontWeight: 'bold',
                 textTransform: 'uppercase',
-                letterSpacing: '1px'
+                letterSpacing: '2px',
+                borderRadius: '8px'
               }}>
-                Time's Up!
+                🚨 Time's Up! 🚨
               </div>
             )}
           </div>
