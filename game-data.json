@@ -81,7 +81,7 @@
             {
               "id": "bad-decisions-1000",
               "value": 1000,
-              "prompt": "This downtown Brampton establishment is the specific bar the Bachelor was ejected from after falling fast asleep at the table.",
+              "prompt": "Name the bar in Brampton establishment that the Bachelor was ejected from after falling fast asleep drunk at the table.",
               "answer": "What is Raxx"
             }
           ]
@@ -89,6 +89,7 @@
         {
           "id": "barstool-science",
           "title": "Barstool Science",
+          "hidden": true,
           "clues": [
             {
               "id": "barstool-science-200",
@@ -367,7 +368,7 @@
             {
               "id": "name-that-sound-1600",
               "value": 1600,
-              "prompt": "Identify the massive online multiplayer game that plays this iconic sound upon achieving a milestone.",
+              "prompt": "Identify this legendary video game series sound effect.",
               "answer": "What is World of Warcraft",
               "media": {
                 "type": "audio",
@@ -389,6 +390,7 @@
         {
           "id": "movie-lines",
           "title": "Movie Lines",
+          "hidden": true,
           "clues": [
             {
               "id": "movie-lines-400",
@@ -446,6 +448,7 @@
         {
           "id": "deep-cuts",
           "title": "Deep Cuts",
+          "hidden": true,
           "clues": [
             {
               "id": "deep-cuts-400",
@@ -482,6 +485,7 @@
         {
           "id": "where-were-we",
           "title": "Where Were We?",
+          "hidden": true,
           "clues": [
             {
               "id": "where-were-we-400",
@@ -538,6 +542,7 @@
         {
           "id": "group-chat-evidence",
           "title": "Group Chat Evidence",
+          "hidden": true,
           "clues": [
             {
               "id": "group-chat-400",
@@ -600,6 +605,7 @@
         {
           "id": "the-bride-knows",
           "title": "The Bride Knows",
+          "hidden": true,
           "clues": [
             {
               "id": "bride-knows-400",
@@ -636,6 +642,7 @@
         {
           "id": "wager-trouble",
           "title": "Wager Trouble",
+          "hidden": true,
           "clues": [
             {
               "id": "wager-trouble-400",
@@ -667,6 +674,78 @@
               "value": 2000,
               "prompt": "What question would cause the loudest argument if asked at the table?",
               "answer": "Fill in the accepted answer"
+            }
+          ]
+        },
+        {
+          "id": "simpson-trivia",
+          "title": "Springfield Trivia",
+          "clues": [
+            {
+              "id": "simpson-trivia-400",
+              "value": 400,
+              "prompt": "The name of the rival snow plow business started by Barney Gumble to compete with Homer.",
+              "answer": "What is the Plow King"
+            },
+            {
+              "id": "simpson-trivia-800",
+              "value": 800,
+              "prompt": "The exact name of the disastrous, bubble-domed car Homer designs that bankrupts his half-brother Herb.",
+              "answer": "What is \"The Homer\""
+            },
+            {
+              "id": "simpson-trivia-1200",
+              "value": 1200,
+              "prompt": "The highly disappointing golf video game Marge buys for Bart for Christmas instead of Bonestorm.",
+              "answer": "What is Lee Carvallo's Putting Challenge"
+            },
+            {
+              "id": "simpson-trivia-1600",
+              "value": 1600,
+              "prompt": "The specific NFL franchise that Hank Scorpio gifts to Homer at the end of the episode \"You Only Move Twice.\"",
+              "answer": "What is the Denver Broncos"
+            },
+            {
+              "id": "simpson-trivia-2000",
+              "value": 2000,
+              "prompt": "The actual, legal first and last name of the character universally known as \"Comic Book Guy.\"",
+              "answer": "Who is Jeff Albertson"
+            }
+          ]
+        },
+        {
+          "id": "matt-jen-edition",
+          "title": "Matt (Jen edition)",
+          "clues": [
+            {
+              "id": "matt-jen-edition-400",
+              "value": 400,
+              "prompt": "Matt (Jen edition) Clue 400",
+              "answer": "Matt (Jen edition) Answer 400"
+            },
+            {
+              "id": "matt-jen-edition-800",
+              "value": 800,
+              "prompt": "Matt (Jen edition) Clue 800",
+              "answer": "Matt (Jen edition) Answer 800"
+            },
+            {
+              "id": "matt-jen-edition-1200",
+              "value": 1200,
+              "prompt": "Matt (Jen edition) Clue 1200",
+              "answer": "Matt (Jen edition) Answer 1200"
+            },
+            {
+              "id": "matt-jen-edition-1600",
+              "value": 1600,
+              "prompt": "Matt (Jen edition) Clue 1600",
+              "answer": "Matt (Jen edition) Answer 1600"
+            },
+            {
+              "id": "matt-jen-edition-2000",
+              "value": 2000,
+              "prompt": "Matt (Jen edition) Clue 2000",
+              "answer": "Matt (Jen edition) Answer 2000"
             }
           ]
         }

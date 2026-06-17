@@ -74,6 +74,7 @@ function validateRound(value: unknown, path: string): Round {
       return {
         id: requireString(category.id, `${path}.categories[${categoryIndex}].id`),
         title: requireString(category.title, `${path}.categories[${categoryIndex}].title`),
+        hidden: typeof category.hidden === 'boolean' ? category.hidden : undefined,
         clues: category.clues.map((clue, clueIndex) =>
           validateClue(clue, `${path}.categories[${categoryIndex}].clues[${clueIndex}]`)
         )
