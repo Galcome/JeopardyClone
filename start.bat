@@ -1,0 +1,6 @@
+@echo off
+echo Starting Backend Server (Party Mode)...
+start "Jeopardy Backend" cmd /k "npm run party"
+
+echo Starting Frontend Server...
+start "Jeopardy Frontend" cmd /k "npm run dev"
