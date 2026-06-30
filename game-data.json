@@ -155,7 +155,8 @@
               "id": "dynamic-duo-1000",
               "value": 1000,
               "prompt": "These two surnames make up the title of the most widely followed stock market index on Wall Street.",
-              "answer": "Who are Dow Jones"
+              "answer": "Who are Dow Jones",
+              "special": "wager"
             }
           ]
         },
@@ -246,7 +247,7 @@
             {
               "id": "mandela-effect-400",
               "value": 400,
-              "prompt": "The exact, five-word revelation Darth Vader speaks to Luke during the climax of The Empire Strikes Back.",
+              "prompt": "The exact, five-word revelation Darth Vader speaks to Luke during the climax of The Empire Strikes Back. ",
               "answer": "What is \"No, I am your father\"",
               "media": {
                 "type": "video",
@@ -276,7 +277,7 @@
             {
               "id": "mandela-effect-1600",
               "value": 1600,
-              "prompt": "The official color of the very tip of Pikachu's tail in the Pokémon franchise.",
+              "prompt": "The official color of the very tip of Pikachu's tail in the original Pokémon franchise.",
               "answer": "What is yellow",
               "media": {
                 "type": "image",
@@ -348,7 +349,7 @@
             {
               "id": "name-that-sound-800",
               "value": 800,
-              "prompt": "Identify the video game franchise associated with this alert sound.",
+              "prompt": "Identify the video game franchise associated with this sound.",
               "answer": "What is Metal Gear Solid",
               "media": {
                 "type": "audio",
@@ -358,7 +359,7 @@
             {
               "id": "name-that-sound-1200",
               "value": 1200,
-              "prompt": "Identify the popular video game associated with this theme sound.",
+              "prompt": "Identify the popular video game associated with this sound.",
               "answer": "What is Super Smash Bros",
               "media": {
                 "type": "audio",
@@ -378,12 +379,13 @@
             {
               "id": "name-that-sound-2000",
               "value": 2000,
-              "prompt": "Identify this classic sci-fi shooter game series sound effect.",
+              "prompt": "Identify this classic sci-fi game series sound effect.",
               "answer": "What is Halo",
               "media": {
                 "type": "audio",
                 "src": "/media/halo.mp3"
-              }
+              },
+              "special": "wager"
             }
           ]
         },
@@ -715,37 +717,38 @@
         },
         {
           "id": "matt-jen-edition",
-          "title": "Matt (Jen edition)",
+          "title": "Matt (Survey says)",
           "clues": [
             {
               "id": "matt-jen-edition-400",
               "value": 400,
-              "prompt": "Matt (Jen edition) Clue 400",
-              "answer": "Matt (Jen edition) Answer 400"
+              "prompt": "What is Matt's Signature drink order at the bar?",
+              "answer": "Beer on tap. Steam whistle or Mill St Organic "
             },
             {
               "id": "matt-jen-edition-800",
               "value": 800,
-              "prompt": "Matt (Jen edition) Clue 800",
-              "answer": "Matt (Jen edition) Answer 800"
+              "prompt": "How do you spell Jen's first and last name?",
+              "answer": "Jennifer Kowalczuk"
             },
             {
               "id": "matt-jen-edition-1200",
               "value": 1200,
-              "prompt": "Matt (Jen edition) Clue 1200",
-              "answer": "Matt (Jen edition) Answer 1200"
+              "prompt": "If Matt could pick one videogame to play the rest of his life, what would it be?",
+              "answer": "Legend of Zelda - Tears of the kingdom. "
             },
             {
               "id": "matt-jen-edition-1600",
               "value": 1600,
-              "prompt": "Matt (Jen edition) Clue 1600",
-              "answer": "Matt (Jen edition) Answer 1600"
+              "prompt": "If Matt is ordering takeout for himself, what is go to order restaurant?",
+              "answer": "Five guys - Burger and fries"
             },
             {
               "id": "matt-jen-edition-2000",
               "value": 2000,
-              "prompt": "Matt (Jen edition) Clue 2000",
-              "answer": "Matt (Jen edition) Answer 2000"
+              "prompt": "Who is Matt's undisputed celebrity crush?",
+              "answer": "Emma Watson",
+              "notes": ""
             }
           ]
         }

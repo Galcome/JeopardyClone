@@ -88,7 +88,7 @@ function hostPayload() {
 }
 
 function publicPayload() {
-  return { game, state: toPublicState(state) };
+  return { game, state: toPublicState(state), joinUrl };
 }
 
 function emitState() {
@@ -192,6 +192,9 @@ function applyCommand(command: HostCommand) {
       }
       break;
     case 'control-media':
+      break;
+    case 'toggle-qr':
+      state.showQR = !state.showQR;
       break;
   }
 }

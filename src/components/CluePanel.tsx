@@ -191,14 +191,28 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
         <aside className="host-controls">
           {clue.special === 'wager' && (
             <div className="control-group">
-              <label htmlFor="wager">Set wager</label>
-              <input
-                id="wager"
-                type="number"
-                min="0"
-                defaultValue={active.wager ?? clue.value}
-                onBlur={(event) => sendCommand({ type: 'set-special-wager', wager: Number(event.currentTarget.value) })}
-              />
+              <label htmlFor="wager">Set wager & reveal clue</label>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <input
+                  id="wager"
+                  type="number"
+                  min="0"
+                  defaultValue={active.wager ?? clue.value}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      sendCommand({ type: 'set-special-wager', wager: Number(event.currentTarget.value) });
+                    }
+                  }}
+                  onBlur={(event) => sendCommand({ type: 'set-special-wager', wager: Number(event.currentTarget.value) })}
+                  style={{ flex: 1 }}
+                />
+                <button type="button" onClick={() => {
+                  const input = document.getElementById('wager') as HTMLInputElement;
+                  if (input) sendCommand({ type: 'set-special-wager', wager: Number(input.value) });
+                }}>
+                  Confirm
+                </button>
+              </div>
             </div>
           )}
 

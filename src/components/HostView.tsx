@@ -138,6 +138,9 @@ export function HostView({ publicPayload, hostPayload, socket, message, sendComm
         <div className="join-card">
           {qr && <img src={qr} alt="Join QR code" />}
           <span>{hostPayload.joinUrl}</span>
+          <button type="button" onClick={() => sendCommand({ type: 'toggle-qr' })} style={{ width: '100%', marginTop: '8px' }}>
+            {state.showQR ? 'Hide QR on Display' : 'Show Big QR on Display'}
+          </button>
         </div>
         {message && <div className="notice">{message}</div>}
       </aside>

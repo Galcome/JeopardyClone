@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Trophy, VolumeX } from 'lucide-react';
+import QRCode from 'qrcode';
 import type { PublicStatePayload } from '../shared/types';
 import { Board } from './Board';
 import { CluePanel } from './CluePanel';
@@ -11,8 +12,9 @@ interface DisplayViewProps {
 }
 
 export function DisplayView({ payload }: DisplayViewProps): JSX.Element {
-  const { game, state } = payload;
+  const { game, state, joinUrl } = payload;
   const round = game.rounds[state.currentRoundIndex] ?? game.rounds[0];
+  const [qrSrc, setQrSrc] = useState<string>('');
 
   const [audioUnlocked, setAudioUnlocked] = useState(() => {
     return typeof navigator !== 'undefined' && !!(navigator as any).userActivation?.hasBeenActive;
@@ -32,6 +34,14 @@ export function DisplayView({ payload }: DisplayViewProps): JSX.Element {
       window.removeEventListener('keydown', unlock);
     };
   }, [audioUnlocked]);
+
+  useEffect(() => {
+    if (joinUrl) {
+      QRCode.toDataURL(joinUrl, { margin: 1, width: 800 })
+        .then(setQrSrc)
+        .catch(() => setQrSrc(''));
+    }
+  }, [joinUrl]);
 
   return (
     <main className="display-layout">
@@ -101,6 +111,20 @@ export function DisplayView({ payload }: DisplayViewProps): JSX.Element {
           <h1>Final Standings</h1>
           <Scoreboard teams={[...state.teams].sort((a, b) => b.score - a.score)} players={state.players} />
         </section>
+      )}
+
+      {qrSrc && state.screen === 'board' && (
+        <div className="qr-small">
+          <img src={qrSrc} alt="Join QR Code" />
+          <span>Scan to Join</span>
+        </div>
+      )}
+
+      {state.showQR && qrSrc && (
+        <div className="qr-overlay">
+          <h1>Scan to Join Game</h1>
+          <img src={qrSrc} alt="Join QR Code" />
+        </div>
       )}
     </main>
   );

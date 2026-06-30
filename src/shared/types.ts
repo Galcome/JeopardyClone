@@ -104,6 +104,7 @@ export interface GameState {
   message?: string;
   timerStartedAt?: number | null;
   timerSeconds?: number;
+  showQR?: boolean;
 }
 
 export interface PublicGameState extends Omit<GameState, 'activeClue'> {
@@ -119,6 +120,7 @@ export interface HostStatePayload {
 export interface PublicStatePayload {
   game: GameData;
   state: PublicGameState;
+  joinUrl: string;
 }
 
 export interface HostAuthPayload {
@@ -158,7 +160,8 @@ export type HostCommand =
   | { type: 'stop-timer' }
   | { type: 'stop-all-sounds' }
   | { type: 'reveal-media' }
-  | { type: 'control-media'; action: 'play' | 'pause' | 'restart' };
+  | { type: 'control-media'; action: 'play' | 'pause' | 'restart' }
+  | { type: 'toggle-qr' };
 
 export type ClientToServerEvents = {
   'host:auth': (payload: HostAuthPayload, callback: (result: { ok: boolean; message?: string }) => void) => void;
@@ -173,6 +176,9 @@ export type ServerToClientEvents = {
   'host:state': (payload: HostStatePayload) => void;
   'public:state': (payload: PublicStatePayload) => void;
   'server:message': (message: string) => void;
+  'play-sound': (soundName: string) => void;
+  'stop-all-sounds': () => void;
+  'control-media': (action: 'play' | 'pause' | 'restart') => void;
 };
 
 export type InterServerEvents = Record<string, never>;

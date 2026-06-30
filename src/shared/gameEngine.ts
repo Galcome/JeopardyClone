@@ -36,8 +36,8 @@ function ensureFinalResults(state: GameState): GameState {
   return next;
 }
 
-export function createInitialState(game: GameData): GameState {
-  const teams = makeTeams(game.defaultTeams);
+export function createInitialState(game: GameData, initialTeams?: Team[]): GameState {
+  const teams = initialTeams ?? makeTeams(game.defaultTeams);
   return {
     screen: 'setup',
     currentRoundIndex: 0,
