@@ -28,7 +28,6 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
   }, [selectedTeamId, state.buzzes, state.teams]);
 
   const [remaining, setRemaining] = useState<number | null>(null);
-  const [playedSoundFor, setPlayedSoundFor] = useState<number | null>(null);
 
   useEffect(() => {
     if (!state.timerStartedAt || !state.timerSeconds) {
@@ -38,6 +37,7 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
 
     const total = state.timerSeconds;
     const startedAt = state.timerStartedAt;
+    let frameId: number;
 
     const updateTimer = () => {
       const elapsed = (Date.now() - startedAt) / 1000;
@@ -45,23 +45,13 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
       setRemaining(left);
 
       if (left > 0) {
-        requestAnimationFrame(updateTimer);
-      } else {
-        if (!hostMode && playedSoundFor !== startedAt) {
-          setPlayedSoundFor(startedAt);
-          if (typeof (window as any).playLocalSound === 'function') {
-            (window as any).playLocalSound('buzz');
-          } else {
-            const audio = new Audio('/sounds/buzz.mp3');
-            audio.play().catch(() => {});
-          }
-        }
+        frameId = requestAnimationFrame(updateTimer);
       }
     };
 
-    const animFrame = requestAnimationFrame(updateTimer);
-    return () => cancelAnimationFrame(animFrame);
-  }, [state.timerStartedAt, state.timerSeconds, hostMode, playedSoundFor]);
+    frameId = requestAnimationFrame(updateTimer);
+    return () => cancelAnimationFrame(frameId);
+  }, [state.timerStartedAt, state.timerSeconds, state.timerMode]);
 
   if (!active || !clue) {
     return <section className="clue-screen">No clue selected.</section>;
@@ -93,7 +83,7 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
           }}>
             {remaining > 0 ? (
               Array.from({ length: 10 }).map((_, idx) => {
-                const threshold = (idx + 1) * 0.5;
+                const threshold = ((idx + 1) * state.timerSeconds!) / 10;
                 const isOn = remaining >= threshold;
                 const isCritical = remaining <= 1.5;
                 const onColor = isCritical ? '#ef476f' : '#ffd166';
@@ -177,6 +167,11 @@ export function CluePanel({ game, state, hostMode, sendCommand }: CluePanelProps
         {!hostMode && state.buzzes[0] && (
           <div className="buzz-banner">
             {state.buzzes[0].playerName} for {state.buzzes[0].teamName}
+          </div>
+        )}
+        {!hostMode && !state.buzzes[0] && (
+          <div className={state.buzzersOpen ? 'buzzer-state-banner open' : 'buzzer-state-banner closed'}>
+            {state.buzzersOpen ? 'Buzzers Open' : 'Buzzers Locked'}
           </div>
         )}
         {!hostMode && active.displayAnswerVisible && (

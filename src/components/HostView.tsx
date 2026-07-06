@@ -117,6 +117,9 @@ export function HostView({ publicPayload, hostPayload, socket, message, sendComm
           >
             Restart Game
           </button>
+          <button type="button" onClick={() => sendCommand({ type: 'toggle-auto-buzzers' })} style={{ background: state.autoOpenBuzzers ? 'var(--gold, #ffd166)' : '', color: state.autoOpenBuzzers ? '#000' : '' }}>
+            Auto-Open Buzzers: {state.autoOpenBuzzers ? 'ON' : 'OFF'}
+          </button>
         </div>
         <div className="sound-board" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1rem', padding: '12px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', fontWeight: 'bold', marginBottom: '4px' }}>

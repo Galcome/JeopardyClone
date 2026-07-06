@@ -66,7 +66,18 @@ function loadSavedState(): GameState | null {
   if (existsSync(stateFile)) {
     try {
       const raw = readFileSync(stateFile, 'utf8');
-      return JSON.parse(raw);
+      const savedState = JSON.parse(raw) as GameState;
+      if (
+        savedState.timerStartedAt &&
+        savedState.timerSeconds &&
+        Date.now() - savedState.timerStartedAt >= savedState.timerSeconds * 1000
+      ) {
+        savedState.timerStartedAt = null;
+        savedState.timerSeconds = undefined;
+        savedState.timerMode = undefined;
+        savedState.buzzersOpen = false;
+      }
+      return savedState;
     } catch (e) {
       console.error('Failed to load saved state', e);
     }
@@ -98,6 +109,63 @@ function emitState() {
   }
 }
 
+let autoOpenTimer: ReturnType<typeof setTimeout> | null = null;
+let activeTimer: ReturnType<typeof setTimeout> | null = null;
+
+function clearAutoOpenTimer() {
+  if (!autoOpenTimer) return;
+  clearTimeout(autoOpenTimer);
+  autoOpenTimer = null;
+}
+
+function clearActiveTimer() {
+  if (!activeTimer) return;
+  clearTimeout(activeTimer);
+  activeTimer = null;
+}
+
+function cancelAutoOpenCountdown() {
+  clearAutoOpenTimer();
+}
+
+function clearTimerState() {
+  clearActiveTimer();
+  state.timerStartedAt = null;
+  state.timerSeconds = undefined;
+  state.timerMode = undefined;
+}
+
+function persistState() {
+  writeFileSync(path.join(rootDir, 'game-state.json'), JSON.stringify(state, null, 2), 'utf-8');
+}
+
+function startTimer(seconds: number, closeBuzzersOnExpire: boolean) {
+  clearActiveTimer();
+  const activeClueId = state.activeClue?.clueId;
+  state.timerStartedAt = Date.now();
+  state.timerSeconds = seconds;
+  state.timerMode = 'buzzing';
+
+  activeTimer = setTimeout(() => {
+    activeTimer = null;
+    const sameClue = !activeClueId || state.activeClue?.clueId === activeClueId;
+    if (!sameClue) return;
+
+    if (closeBuzzersOnExpire && state.buzzersOpen) {
+      state = clearBuzzers(state);
+    }
+    clearTimerState();
+    state.message = "Time's up";
+    io.emit('play-sound', 'buzz');
+    emitState();
+    try {
+      persistState();
+    } catch (e) {
+      console.error('Auto-save failed', e);
+    }
+  }, seconds * 1000);
+}
+
 function applyCommand(command: HostCommand) {
   switch (command.type) {
     case 'set-teams':
@@ -108,36 +176,65 @@ function applyCommand(command: HostCommand) {
       break;
     case 'select-clue':
       state = selectClue(state, game, command.roundId, command.categoryId, command.clueId);
+      clearAutoOpenTimer();
+      clearTimerState();
+      if (state.autoOpenBuzzers) {
+        const clue = game.rounds.find(r => r.id === command.roundId)?.categories.find(c => c.id === command.categoryId)?.clues.find(c => c.id === command.clueId);
+        if (clue && clue.special !== 'wager') {
+          autoOpenTimer = setTimeout(() => {
+            autoOpenTimer = null;
+            if (state.screen === 'clue' && state.activeClue?.clueId === command.clueId && !state.buzzersOpen) {
+              state = openBuzzers(state);
+              startTimer(10, true);
+              emitState();
+              try {
+                persistState();
+              } catch (e) {
+                console.error('Auto-save failed', e);
+              }
+            }
+          }, 5000);
+        }
+      }
       break;
     case 'show-answer':
+      cancelAutoOpenCountdown();
       state = revealHostAnswer(state);
       break;
     case 'reveal-answer-to-display':
+      cancelAutoOpenCountdown();
       state = revealDisplayAnswer(state);
       break;
     case 'open-buzzers':
+      clearAutoOpenTimer();
       state = openBuzzers(state);
-      state.timerStartedAt = Date.now();
-      state.timerSeconds = 5;
+      startTimer(10, true);
       break;
     case 'clear-buzzers':
+      clearAutoOpenTimer();
       state = clearBuzzers(state);
-      state.timerStartedAt = null;
+      clearTimerState();
       break;
     case 'mark-correct':
+      clearAutoOpenTimer();
       state = markCorrect(state, game, command.teamId);
-      state.timerStartedAt = null;
+      clearTimerState();
       break;
     case 'mark-wrong':
+      clearAutoOpenTimer();
       state = markWrong(state, game, command.teamId, command.reopen);
-      state.timerStartedAt = null;
+      if (command.reopen) startTimer(10, true);
+      else clearTimerState();
       break;
     case 'return-board':
+      clearAutoOpenTimer();
       state = returnToBoard(state);
-      state.timerStartedAt = null;
+      clearTimerState();
       break;
     case 'unreveal-clue':
+      clearAutoOpenTimer();
       state = unrevealClue(state);
+      clearTimerState();
       break;
     case 'reveal-next-category':
       state = revealNextCategory(state, game);
@@ -147,6 +244,7 @@ function applyCommand(command: HostCommand) {
       state = { ...state, message: 'Game progress saved' };
       break;
     case 'reset-game':
+      clearAutoOpenTimer();
       const resetTeams = state.teams.map((t) => ({ ...t, score: 0 }));
       state = showCurrentBoard(createInitialState(game, resetTeams));
       state.message = 'Game completely restarted';
@@ -158,13 +256,19 @@ function applyCommand(command: HostCommand) {
       state = setSpecialWager(state, command.wager);
       break;
     case 'advance-round':
+      clearAutoOpenTimer();
       state = advanceRound(state, game);
+      clearTimerState();
       break;
     case 'previous-round':
+      clearAutoOpenTimer();
       state = previousRound(state, game);
+      clearTimerState();
       break;
     case 'start-final':
+      clearAutoOpenTimer();
       state = startFinal(state);
+      clearTimerState();
       break;
     case 'reveal-final':
       state = revealFinalClue(state);
@@ -178,11 +282,11 @@ function applyCommand(command: HostCommand) {
     case 'test-sound':
       break;
     case 'start-timer':
-      state.timerStartedAt = Date.now();
-      state.timerSeconds = command.seconds ?? 5;
+      startTimer(command.seconds ?? 5, false);
       break;
     case 'stop-timer':
-      state.timerStartedAt = null;
+      clearAutoOpenTimer();
+      clearTimerState();
       break;
     case 'stop-all-sounds':
       break;
@@ -195,6 +299,11 @@ function applyCommand(command: HostCommand) {
       break;
     case 'toggle-qr':
       state.showQR = !state.showQR;
+      break;
+    case 'toggle-auto-buzzers':
+      cancelAutoOpenCountdown();
+      state.autoOpenBuzzers = !state.autoOpenBuzzers;
+      state.message = state.autoOpenBuzzers ? 'Auto-open buzzers ON for the next clue' : 'Auto-open buzzers OFF';
       break;
   }
 }
@@ -236,7 +345,7 @@ io.on('connection', (socket) => {
 
       emitState();
       try {
-        writeFileSync(path.join(rootDir, 'game-state.json'), JSON.stringify(state, null, 2), 'utf-8');
+        persistState();
       } catch (e) {
         console.error('Auto-save failed', e);
       }
@@ -290,7 +399,7 @@ io.on('connection', (socket) => {
     state = registerBuzz(state, socket.data.player);
     if (state.buzzes.length > prevBuzzCount) {
       io.emit('play-sound', 'buzz');
-      state.timerStartedAt = null;
+      clearTimerState();
     }
     emitState();
   });
@@ -304,7 +413,7 @@ io.on('connection', (socket) => {
       };
       emitState();
       try {
-        writeFileSync(path.join(rootDir, 'game-state.json'), JSON.stringify(state, null, 2), 'utf-8');
+        persistState();
       } catch (e) {}
     }
   });

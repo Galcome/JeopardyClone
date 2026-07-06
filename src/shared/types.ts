@@ -104,7 +104,9 @@ export interface GameState {
   message?: string;
   timerStartedAt?: number | null;
   timerSeconds?: number;
+  timerMode?: 'buzzing';
   showQR?: boolean;
+  autoOpenBuzzers?: boolean;
 }
 
 export interface PublicGameState extends Omit<GameState, 'activeClue'> {
@@ -161,7 +163,8 @@ export type HostCommand =
   | { type: 'stop-all-sounds' }
   | { type: 'reveal-media' }
   | { type: 'control-media'; action: 'play' | 'pause' | 'restart' }
-  | { type: 'toggle-qr' };
+  | { type: 'toggle-qr' }
+  | { type: 'toggle-auto-buzzers' };
 
 export type ClientToServerEvents = {
   'host:auth': (payload: HostAuthPayload, callback: (result: { ok: boolean; message?: string }) => void) => void;
