@@ -163,4 +163,20 @@ describe('game engine', () => {
     expect(state.teams[1].score).toBe(-500);
     expect(state.finalResults['team-1']).toMatchObject({ wager: 700, correct: true, locked: true });
   });
+
+  it('does not score a locked final result more than once', () => {
+    let state = startFinal(createInitialState(game));
+    state = adjustScore(state, 'team-1', 1000);
+    state = setFinalWager(state, 'team-1', 700);
+    state = resolveFinalTeam(state, 'team-1', true);
+
+    const lockedState = state;
+    state = resolveFinalTeam(state, 'team-1', true);
+    state = resolveFinalTeam(state, 'team-1', false);
+
+    expect(state).toBe(lockedState);
+    expect(state.teams[0].score).toBe(1700);
+    expect(state.finalResults['team-1']).toEqual({ wager: 700, correct: true, locked: true });
+    expect(state.finalResults['team-2'].locked).toBe(false);
+  });
 });

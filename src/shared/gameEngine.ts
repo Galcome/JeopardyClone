@@ -291,6 +291,7 @@ export function setFinalWager(state: GameState, teamId: string, wager: number): 
 
 export function resolveFinalTeam(state: GameState, teamId: string, correct: boolean): GameState {
   const result = state.finalResults[teamId];
+  if (result?.locked) return state;
   const wager = result?.wager ?? 0;
   let next = updateTeamScore(state, teamId, correct ? wager : -wager);
   next.finalResults[teamId] = { wager, correct, locked: true };
