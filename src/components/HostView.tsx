@@ -178,7 +178,7 @@ export function HostView({ publicPayload, hostPayload, socket, message, sendComm
           </section>
         )}
 
-        {(state.screen === 'final' || state.screen === 'standings') && (
+        {state.screen === 'final' && (
           <section className="final-host">
             <p className="eyebrow">Final Challenge</p>
             <h2>{game.finalChallenge.category}</h2>
@@ -208,14 +208,18 @@ export function HostView({ publicPayload, hostPayload, socket, message, sendComm
                   {game.finalChallenge.notes && <p>{game.finalChallenge.notes}</p>}
                 </div>
                 <div className="final-results">
-                  {state.teams.map((team) => (
-                    <div key={team.id} className="final-team-row">
-                      <span>{team.name}</span>
-                      <span>Wager {state.finalResults[team.id]?.wager ?? 0}</span>
-                      <button type="button" onClick={() => sendCommand({ type: 'resolve-final-team', teamId: team.id, correct: true })}>Correct</button>
-                      <button type="button" onClick={() => sendCommand({ type: 'resolve-final-team', teamId: team.id, correct: false })}>Wrong</button>
-                    </div>
-                  ))}
+                  {state.teams.map((team) => {
+                    const result = state.finalResults[team.id];
+                    return (
+                      <div key={team.id} className="final-team-row">
+                        <span>{team.name}</span>
+                        <span>Wager {result?.wager ?? 0}</span>
+                        <button type="button" disabled={result?.locked} onClick={() => sendCommand({ type: 'resolve-final-team', teamId: team.id, correct: true })}>Correct</button>
+                        <button type="button" disabled={result?.locked} onClick={() => sendCommand({ type: 'resolve-final-team', teamId: team.id, correct: false })}>Wrong</button>
+                        {result?.locked && <strong>{result.correct ? 'Correct' : 'Wrong'}</strong>}
+                      </div>
+                    );
+                  })}
                 </div>
               </>
             )}
